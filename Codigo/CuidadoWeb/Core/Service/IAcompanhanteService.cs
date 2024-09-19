@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Core.Service
 {
-	public interface IResidenteService
+	public interface IAcompanhanteService
 	{
-		uint Create(Residente residente);
-		void Edit(Residente residente);
+		uint Create(Acompanhante acompanhante);
+		void Edit(Acompanhante acompanhante);
 		void Delete(int id);
-		Residente? Get(int id);
+		Acompanhante? Get(int id);
 	}
 }
