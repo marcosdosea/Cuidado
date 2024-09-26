@@ -23,6 +23,7 @@ namespace CuidadoWeb
 			});
 
 			builder.Services.AddTransient<IProdutoService, ProdutoService>();
+			builder.Services.AddTransient<IFuncionarioService, FuncionarioService>();
 
 			var app = builder.Build();
 

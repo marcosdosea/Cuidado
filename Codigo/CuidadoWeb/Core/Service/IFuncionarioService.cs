@@ -8,9 +8,10 @@ namespace Core.Service
 {
 	public interface IFuncionarioService
 	{
-		uint Create(Funcionario funcionario);
+		int Create(Funcionario funcionario);
 		void Edit(Funcionario funcionario);
 		void Delete(int id);
 		Funcionario? Get(int id);
+		IEnumerable<Funcionario> GetAll();
 	}
 }
