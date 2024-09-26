@@ -24,8 +24,9 @@ namespace CuidadoWeb
 
 			builder.Services.AddTransient<IProdutoService, ProdutoService>();
 			builder.Services.AddTransient<IFuncionarioService, FuncionarioService>();
+            builder.Services.AddTransient<IVisitanteService, VisitanteService>();
 
-			var app = builder.Build();
+            var app = builder.Build();
 
 			// Configure the HTTP request pipeline.
 			if (!app.Environment.IsDevelopment())

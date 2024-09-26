@@ -8,9 +8,10 @@ namespace Core.Service
 {
 	public interface IVisitanteService
 	{
-		uint Create(Visitante visitante);
+		int Create(Visitante visitante);
 		void Edit(Visitante visitante);
 		void Delete(int id);
 		Visitante? Get(int id);
-	}
+        IEnumerable<Visitante> GetAll();
+    }
 }
