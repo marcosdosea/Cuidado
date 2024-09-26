@@ -18,14 +18,14 @@ namespace Service
 		/// </summary>
 		/// <param name="produto">Dados do produto</param>
 		/// <returns>Id do produto</returns>
-		public uint Create(Produto produto)
+		public int Create(Produto produto)
 		{
 			this.context.Add(produto);
 			this.context.SaveChanges();
 			return produto.Id;
 		}
 
-		/// <summary>
+		/// <summary>s
 		/// Remover o produto da base de dados
 		/// </summary>
 		/// <param name="id"></param>

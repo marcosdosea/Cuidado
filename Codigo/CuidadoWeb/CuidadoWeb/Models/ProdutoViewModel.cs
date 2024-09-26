@@ -6,7 +6,8 @@ namespace CuidadoWeb.Models
 	public class ProdutoViewModel
 	{
 		[Key]
-		public uint Id { get; set; }
+		[Display(Name = "Código")]
+		public int Id { get; set; }
 
 		[Required(ErrorMessage = "Campo requerido")]
 		[StringLength(50, MinimumLength = 5, ErrorMessage = "Nome do produto deve ter entre 5 e 45 caracteres")]
@@ -18,6 +19,7 @@ namespace CuidadoWeb.Models
 		public string Classificacao { get; set; } = null!;
 
 		[ForeignKey("Organizacao")]
+		[Display(Name = "Código Organização")]
 		public int IdOrganizacao { get; set; }
 	}
 }

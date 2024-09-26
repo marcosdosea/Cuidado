@@ -8,7 +8,7 @@ namespace Core.Service
 {
 	public interface IProdutoService
 	{
-		uint Create(Produto produto);
+		int Create(Produto produto);
 		void Edit(Produto produto);
 		void Delete(int id);
 		Produto? Get(int id);

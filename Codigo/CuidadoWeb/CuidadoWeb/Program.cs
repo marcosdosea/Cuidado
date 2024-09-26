@@ -1,3 +1,8 @@
+using Core.Service;
+using Core;
+using Microsoft.EntityFrameworkCore;
+using Service;
+
 namespace CuidadoWeb
 {
 	public class Program
@@ -8,6 +13,16 @@ namespace CuidadoWeb
 
 			// Add services to the container.
 			builder.Services.AddControllersWithViews();
+
+			builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+			var connectionString = builder.Configuration.GetConnectionString("CuidadoDatabase") ?? throw new InvalidOperationException(); ;
+			builder.Services.AddDbContext<CuidadoContext>(options =>
+			{
+				options.UseMySQL(connectionString);
+			});
+
+			builder.Services.AddTransient<IProdutoService, ProdutoService>();
 
 			var app = builder.Build();
 
