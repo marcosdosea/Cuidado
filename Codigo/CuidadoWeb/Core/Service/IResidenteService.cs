@@ -12,5 +12,6 @@ namespace Core.Service
 		void Edit(Residente residente);
 		void Delete(int id);
 		Residente? Get(int id);
-	}
+        IEnumerable<Residente> GetAll();
+    }
 }
