@@ -10,7 +10,7 @@ namespace CuidadoWeb.Models
 		public int Id { get; set; }
 
 		[Required(ErrorMessage = "Campo requerido")]
-		[StringLength(50, MinimumLength = 5, ErrorMessage = "Nome do produto deve ter entre 5 e 45 caracteres")]
+		[StringLength(50, MinimumLength = 5, ErrorMessage = "Nome do produto deve ter entre 5 e 50 caracteres")]
 		public string Nome { get; set; } = null!;
 
 		[Required(ErrorMessage = "Campo requerido")]
