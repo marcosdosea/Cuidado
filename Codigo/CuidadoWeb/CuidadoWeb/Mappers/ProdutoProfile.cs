@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core;
 using CuidadoWeb.Models;
 
 namespace CuidadoWeb.Mappers
@@ -7,7 +8,7 @@ namespace CuidadoWeb.Mappers
 	{
 		public ProdutoProfile() 
 		{
-			CreateMap<ProdutoViewModel, ProdutoViewModel>().ReverseMap();
+			CreateMap<ProdutoViewModel, Produto>().ReverseMap();
 		}
 	}
 }
