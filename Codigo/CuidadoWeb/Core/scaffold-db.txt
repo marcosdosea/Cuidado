@@ -1,9 +1,15 @@
-﻿dotnet add Core package MySql.EntityFrameworkCore -v 7.0.5
-dotnet add Core package MySql.Data -v 8.1.0
-dotnet add Core package Microsoft.EntityFrameworkCore.Tools -v 7.0.10
-dotnet add Core package Microsoft.EntityFrameworkCore.Design -v 7.0.10
-dotnet restore
+﻿# Dependências
 
 dotnet tool install --global dotnet-ef
+
+dotnet add Core package MySql.EntityFrameworkCore -v 8.0.5
+dotnet add Core package Microsoft.EntityFrameworkCore.Tools -v 8.0.8
+dotnet add CuidadoWeb package Microsoft.EntityFrameworkCore.Tools -v 8.0.8
+dotnet add Core package Microsoft.EntityFrameworkCore.Design -v 8.0.8
+dotnet add CuidadoWeb package Microsoft.EntityFrameworkCore.Design -v 8.0.8
+dotnet add CuidadoWeb package Microsoft.AspNetCore.Identity.UI -v 8.0.8
+dotnet add Service package Microsoft.EntityFrameworkCore.Tools -v 8.0.8
+
+# Banco
 
 dotnet ef dbcontext scaffold "server=localhost;port=3306;user=root;password=123456;database=Cuidado" MySql.EntityFrameworkCore -p Core -c CuidadoContext -f -v

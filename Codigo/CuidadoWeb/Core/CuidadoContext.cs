@@ -63,7 +63,7 @@ public partial class CuidadoContext : DbContext
 
     public virtual DbSet<Visitum> Visita { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Acompanhante>(entity =>
         {
