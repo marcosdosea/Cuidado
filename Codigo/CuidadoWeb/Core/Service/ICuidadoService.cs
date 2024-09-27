@@ -6,5 +6,6 @@
 		void Edit(Cuidado cuidado);
 		void Delete(int id);
 		Cuidado? Get(int id);
+		IEnumerable<Cuidado> GetAll();
 	}
 }
