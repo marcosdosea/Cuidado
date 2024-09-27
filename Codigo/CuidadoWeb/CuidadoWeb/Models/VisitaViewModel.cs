@@ -2,7 +2,7 @@
 
 namespace CuidadoWeb.Models
 {
-    public class VisitanteViewModel
+    public class VisitaViewModel
     {
         [Key]
         [Display(Name = "Código")]
