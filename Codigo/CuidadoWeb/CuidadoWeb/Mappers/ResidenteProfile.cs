@@ -7,7 +7,7 @@ namespace CuidadoWeb.Mappers
 	{
 		public ResidenteProfile() 
 		{
-			CreateMap<ResidenteViewModel, ResidenteViewModel>().ReverseMap();
+			CreateMap<ResidenteViewModel, Residente>().ReverseMap();
 		}
 	}
 }
