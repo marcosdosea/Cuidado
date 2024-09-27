@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Core.Service
+﻿namespace Core.Service
 {
 	public interface ICuidadoService
 	{
-		uint Create(Cuidado cuidado);
+		int Create(Cuidado cuidado);
 		void Edit(Cuidado cuidado);
 		void Delete(int id);
 		Cuidado? Get(int id);
+		IEnumerable<Cuidado> GetAll();
 	}
 }

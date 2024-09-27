@@ -22,6 +22,7 @@ namespace CuidadoWeb
                 options.UseMySQL(connectionString);
             });
 
+            builder.Services.AddTransient<ICuidadoService, CuidadoService>();
             builder.Services.AddTransient<IProdutoService, ProdutoService>();
             builder.Services.AddTransient<IFuncionarioService, FuncionarioService>();
             builder.Services.AddTransient<IVisitanteService, VisitanteService>();
