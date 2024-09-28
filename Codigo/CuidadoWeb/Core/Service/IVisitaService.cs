@@ -2,9 +2,11 @@
 {
 	public interface IVisitaService
 	{
-		uint Create(Visitum visita);
+		int Create(Visitum visita);
 		void Edit(Visitum visita);
 		void Delete(int id);
 		Visitum? Get(int id);
-	}
+
+        IEnumerable<Visitum> GetAll();
+    }
 }
