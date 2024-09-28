@@ -47,3 +47,87 @@ body {
     font-weight: normal;
 }
 
+/**
+ * Typography
+ */
+.app-text-h-lg {
+    font-family: "DM Sans";
+    font-size: 24px;
+    font-weight: 700 /* bold */;
+
+    line-height: normal;
+    letter-spacing: -5%;
+}
+
+.app-text-h-md {
+    font-family: "DM Sans";
+    font-size: 20px;
+    font-weight: 700 /* bold */;
+
+    line-height: normal;
+    letter-spacing: -5%;
+}
+
+.app-text-h-sm {
+    font-family: "DM Sans";
+    font-size: 18px;
+    font-weight: 700 /* bold */;
+
+    line-height: normal;
+    letter-spacing: -5%;
+}
+
+.app-text-h-xs {
+    font-family: "DM Sans";
+    font-size: 16px;
+    font-weight: 500 /* medium */;
+
+    line-height: normal;
+    letter-spacing: -5%;
+}
+
+.app-text-b-lg {
+    font-family: "DM Sans";
+    font-size: 18px;
+    font-weight: 400 /* normal */;
+
+    line-height: 120%;
+    letter-spacing: -5%;
+}
+
+.app-text-b-md {
+    font-family: "DM Sans";
+    font-size: 16px;
+    font-weight: 400 /* normal */;
+
+    line-height: 120%;
+    letter-spacing: -5%;
+}
+
+.app-text-b-sm {
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-weight: 400 /* normal */;
+
+    line-height: 120%;
+    letter-spacing: -5%;
+}
+
+.app-text-b-xs {
+    font-family: "DM Sans";
+    font-size: 12px;
+    font-weight: 400 /* normal */;
+
+    line-height: 120%;
+    letter-spacing: -5%;
+}
+
+.app-text-btn {
+    font-family: "DM Sans";
+    font-size: 16px;
+    font-weight: 500 /* normal */;
+
+    line-height: normal;
+    letter-spacing: -5%;
+}
+
