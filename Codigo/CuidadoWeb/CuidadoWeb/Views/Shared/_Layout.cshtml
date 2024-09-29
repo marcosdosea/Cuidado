@@ -56,12 +56,10 @@ parte -->
         </div>
     </div>
 
-    <main role="main" class="pb-3">
+    <main role="main" class="app-main-content">
+        <img class="app-logo-bg" src="~/assets/logo/colorless.svg" alt="Cuidado logo" />
         @RenderBody()
     </main>
-
-    <footer class="border-top footer text-muted">
-    </footer>
 
     <script src="~/js/script.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

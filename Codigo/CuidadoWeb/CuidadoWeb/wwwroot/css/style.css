@@ -134,3 +134,21 @@ body {
     letter-spacing: -5%;
 }
 
+.app-main-content {
+    position: relative;
+
+    width: 100%;
+    height: calc(100% - 6em);
+}
+
+.app-logo-bg {
+    height: 13em;
+    width: 46em;
+
+    transform: translate(-50%, -50%);
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+

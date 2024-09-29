@@ -12,6 +12,11 @@
     padding: 2.5em 0.75em;
 
     background-color: var(--secondary);
+    z-index: 10;
+}
+
+.app-side-bar:hover .app-side-bar-label {
+    display: inline;
 }
 
 
