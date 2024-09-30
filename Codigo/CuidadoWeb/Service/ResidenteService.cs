@@ -18,11 +18,11 @@ namespace Service
 		/// </summary>
 		/// <param name="Residente">Dados do Residente</param>
 		/// <returns>Id do Residente</returns>
-		public int Create(Residente Residente)
+		public int Create(Residente residente)
 		{
-			this.context.Add(Residente);
+			this.context.Add(residente);
 			this.context.SaveChanges();
-			return Residente.Id;
+			return residente.Id;
 		}
 
 		/// <summary>s
@@ -31,10 +31,10 @@ namespace Service
 		/// <param name="id"></param>
 		public void Delete(int id)
 		{
-			var Residente = this.context.Residentes.Find(id);
-			if(Residente != null)
+			var residente = this.context.Residentes.Find(id);
+			if(residente != null)
 			{
-				this.context.Remove(Residente);
+				this.context.Remove(residente);
 				this.context.SaveChanges();
 			}
 		}
@@ -43,9 +43,9 @@ namespace Service
 		/// Editar dados do Residente na base de dados
 		/// </summary>
 		/// <param name="Residente"></param>
-		public void Edit(Residente Residente)
+		public void Edit(Residente residente)
 		{
-			this.context.Update(Residente);
+			this.context.Update(residente);
 			this.context.SaveChanges();
 		}
 
