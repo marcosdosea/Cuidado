@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Core.Service
+﻿namespace Core.Service
 {
 	public interface IVisitaService
 	{
@@ -12,7 +6,7 @@ namespace Core.Service
 		void Edit(Visitum visita);
 		void Delete(int id);
 		Visitum? Get(int id);
-
         IEnumerable<Visitum> GetAll();
+        IEnumerable<Visitum> GetByNome(string nome);
     }
 }
