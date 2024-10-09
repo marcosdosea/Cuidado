@@ -1,4 +1,4 @@
-.app-side-bar {
+.app-sidebar {
     position: absolute;
     top: 6em /* 6em come from header height */;
     left: 0;
@@ -6,7 +6,7 @@
 
     display: flex;
     flex-flow: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
 
     padding: 2.5em 0.75em;
@@ -15,29 +15,20 @@
     z-index: 10;
 }
 
-.app-side-bar:hover .app-side-bar-label {
+.app-sidebar:hover .button .label {
     display: inline;
 }
 
-
-/* Top part of side bar */
-.app-side-bar-top {
+/* Parts of the side bar */
+.app-sidebar .top-container,
+.app-sidebar .bottom-container {
     display: flex;
     gap: 2em;
     flex-flow: column;
 }
-
-
-/* Bottom part of side bar */
-.app-side-bar-bottom {
-    display: flex;
-    gap: 2em;
-    flex-flow: column;
-}
-
 
 /* Button component */
-.app-side-bar-button {
+.app-sidebar .button {
     cursor: pointer;
     display: flex;
     gap: 1em;
@@ -45,14 +36,14 @@
     align-items: center;
 }
 
-.app-side-bar-button:hover {
+.app-sidebar .button:hover {
     color: var(--primary);
     padding: 0.5em 1.25em;
     border-radius: 1.25em;
     background-color: var(--white);
 }
 
-.app-side-bar-icon {
+.app-sidebar .button .icon {
     font-size: 3em;
 
     display: flex;
@@ -60,7 +51,7 @@
     justify-content: center;
 }
 
-.app-side-bar-label {
+.app-sidebar .button .label {
     display: none;
 }
 
