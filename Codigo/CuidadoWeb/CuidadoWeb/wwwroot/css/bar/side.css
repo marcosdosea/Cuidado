@@ -1,0 +1,66 @@
+.app-side-bar {
+    position: absolute;
+    top: 6em /* 6em come from header height */;
+    left: 0;
+    bottom: 0;
+
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 2.5em 0.75em;
+
+    background-color: var(--secondary);
+    z-index: 10;
+}
+
+.app-side-bar:hover .app-side-bar-label {
+    display: inline;
+}
+
+
+/* Top part of side bar */
+.app-side-bar-top {
+    display: flex;
+    gap: 2em;
+    flex-flow: column;
+}
+
+
+/* Bottom part of side bar */
+.app-side-bar-bottom {
+    display: flex;
+    gap: 2em;
+    flex-flow: column;
+}
+
+
+/* Button component */
+.app-side-bar-button {
+    cursor: pointer;
+    display: flex;
+    gap: 1em;
+    flex-flow: row;
+    align-items: center;
+}
+
+.app-side-bar-button:hover {
+    color: var(--primary);
+    padding: 0.5em 1.25em;
+    border-radius: 1.25em;
+    background-color: var(--white);
+}
+
+.app-side-bar-icon {
+    font-size: 3em;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.app-side-bar-label {
+    display: none;
+}
+

@@ -24,24 +24,42 @@
 <body>
     <header>
         <nav class="app-top-bar">
-            <img class="app-logo" src="~/assets/logo/colorful.svg" alt="Cuidado logo">
+            <a asp-controller="Home" asp-action="Index">
+                <img class="app-logo" src="~/assets/logo/colorful.svg" alt="Cuidado logo" />
+            </a>
 
             <div class="app-user-info">
-                <b>Nome do funcionário</b>
-                <i>Cargo</i>
+                <!-- TODO: quando implementar autenticação implementar essa
+parte -->
+                <p class="app-text-h-md">Nome do funcionário</p>
+                <p class="app-text-b-lg">Cargo</p>
             </div>
         </nav>
     </header>
 
-    <main role="main" class="pb-3">
+    <div class="app-side-bar">
+        <div class="app-side-bar-top">
+            <div class="app-side-bar-button">
+                <i class="ph ph-house app-side-bar-icon"></i>
+                <p class="app-text-h-lg app-side-bar-label">Início</p>
+            </div>
+            <div class="app-side-bar-button">
+                <i class="ph ph-wrench app-side-bar-icon"></i>
+                <p class="app-text-h-lg app-side-bar-label">Gerenciamento</p>
+            </div>
+        </div>
+        <div class="app-side-bar-bottom">
+            <div class="app-side-bar-button">
+                <i class="ph ph-sliders-horizontal app-side-bar-icon"></i>
+                <p class="app-text-h-lg app-side-bar-label">Configurações</p>
+            </div>
+        </div>
+    </div>
+
+    <main role="main" class="app-main-content">
+        <img class="app-logo-bg" src="~/assets/logo/colorless.svg" alt="Cuidado logo" />
         @RenderBody()
     </main>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - CuidadoWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
 
     <script src="~/js/script.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

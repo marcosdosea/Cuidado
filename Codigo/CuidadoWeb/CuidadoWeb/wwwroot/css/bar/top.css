@@ -1,0 +1,23 @@
+.app-top-bar {
+    width: 100%;
+    height: 6em;
+
+    padding: 0.5em 1em;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: var(--secondary);
+}
+
+.app-logo {
+    height: 4.75em;
+}
+
+.app-user-info {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-end;
+}
+
