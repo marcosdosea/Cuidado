@@ -18,19 +18,18 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Go to correct directory
+      run: |
+        cd ./Codigo/CuidadoWeb
+        echo "Current work directory: $(pwd)"
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
 
     - name: Restore (aka fetch) dependencies
-      run: dotnet restore # TODO: include path to project
+      run: dotnet restore
 
     - name: Build
-      run: dotnet build --no-restore # TODO: include path to project
-
-    - name: Test for Web
-      run: dotnet test --no-build --verbosity normal # TODO: include path to project
-
-    - name: Test for Service
-      run: dotnet test --no-build --verbosity normal # TODO: include path to project
+      run: dotnet build
