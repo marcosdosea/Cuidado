@@ -1,14 +1,10 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
-name: Project build and test
+name: Project build
 
 on:
   push:
     branches: [ "main", "ci" ]
   pull_request:
     branches: [ "main", "ci" ]
-  workflow_dispatch:
 
 jobs:
   build:
@@ -30,4 +26,4 @@ jobs:
       run: dotnet restore
 
     - name: Build
-      run: dotnet build
+      run: dotnet build --no-restore
