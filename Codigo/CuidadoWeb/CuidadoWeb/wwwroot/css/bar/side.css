@@ -34,6 +34,8 @@
     gap: 1em;
     flex-flow: row;
     align-items: center;
+    text-decoration: none;
+    color: var(--black);
 }
 
 .app-sidebar .button:hover {
