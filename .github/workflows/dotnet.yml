@@ -30,7 +30,9 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Restore (aka fetch) dependencies
-      run: dotnet restore CuidadoWeb.sln
+      run: |
+        pwd # test
+        dotnet restore CuidadoWeb.sln
 
     - name: Build
       run: dotnet build
