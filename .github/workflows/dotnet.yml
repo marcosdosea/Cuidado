@@ -1,0 +1,36 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: Project build and test
+
+on:
+  push:
+    branches: [ "main", "ci" ]
+  pull_request:
+    branches: [ "main", "ci" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Restore (aka fetch) dependencies
+      run: dotnet restore # TODO: include path to project
+
+    - name: Build
+      run: dotnet build --no-restore # TODO: include path to project
+
+    - name: Test for Web
+      run: dotnet test --no-build --verbosity normal # TODO: include path to project
+
+    - name: Test for Service
+      run: dotnet test --no-build --verbosity normal # TODO: include path to project
