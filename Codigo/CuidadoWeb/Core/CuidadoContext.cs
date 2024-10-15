@@ -63,7 +63,11 @@ public partial class CuidadoContext : DbContext
 
     public virtual DbSet<Visitum> Visita { get; set; }
 
-	protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=123456;database=ModeloCuidado");
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Acompanhante>(entity =>
         {
@@ -73,12 +77,8 @@ public partial class CuidadoContext : DbContext
 
             entity.HasIndex(e => e.IdAtividadeExterna, "fk_acompanhantes_atividadeExterna1_idx");
 
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
-            entity.Property(e => e.IdAtividadeExterna)
-                .HasColumnType("int(11)")
-                .HasColumnName("idAtividadeExterna");
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.IdAtividadeExterna).HasColumnName("idAtividadeExterna");
             entity.Property(e => e.Nome)
                 .HasMaxLength(50)
                 .HasColumnName("nome");
@@ -99,21 +99,15 @@ public partial class CuidadoContext : DbContext
 
             entity.HasIndex(e => e.IdFuncionario, "fk_aquisicao_funcionario1_idx");
 
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.DataEntrada)
                 .HasColumnType("datetime")
                 .HasColumnName("dataEntrada");
             entity.Property(e => e.DataSolicitacao)
                 .HasColumnType("datetime")
                 .HasColumnName("dataSolicitacao");
-            entity.Property(e => e.IdFornecedor)
-                .HasColumnType("int(11)")
-                .HasColumnName("idFornecedor");
-            entity.Property(e => e.IdFuncionario)
-                .HasColumnType("int(11)")
-                .HasColumnName("idFuncionario");
+            entity.Property(e => e.IdFornecedor).HasColumnName("idFornecedor");
+            entity.Property(e => e.IdFuncionario).HasColumnName("idFuncionario");
             entity.Property(e => e.Observacoes)
                 .HasMaxLength(200)
                 .HasColumnName("observacoes");
@@ -139,21 +133,15 @@ public partial class CuidadoContext : DbContext
 
             entity.HasIndex(e => e.IdProduto, "fk_aquisicao_has_produto_produto1_idx");
 
-            entity.Property(e => e.IdAquisicao)
-                .HasColumnType("int(11)")
-                .HasColumnName("idAquisicao");
-            entity.Property(e => e.IdProduto)
-                .HasColumnType("int(11)")
-                .HasColumnName("idProduto");
+            entity.Property(e => e.IdAquisicao).HasColumnName("idAquisicao");
+            entity.Property(e => e.IdProduto).HasColumnName("idProduto");
             entity.Property(e => e.DataValidade)
                 .HasColumnType("datetime")
                 .HasColumnName("dataValidade");
             entity.Property(e => e.Lote)
                 .HasMaxLength(50)
                 .HasColumnName("lote");
-            entity.Property(e => e.Quantidade)
-                .HasColumnType("int(11)")
-                .HasColumnName("quantidade");
+            entity.Property(e => e.Quantidade).HasColumnName("quantidade");
 
             entity.HasOne(d => d.IdAquisicaoNavigation).WithMany(p => p.Aquisicaoprodutos)
                 .HasForeignKey(d => d.IdAquisicao)
@@ -176,9 +164,7 @@ public partial class CuidadoContext : DbContext
 
             entity.HasIndex(e => e.IdResidente, "fk_atividadeExterna_residente1_idx");
 
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.DataRealizacao)
                 .HasColumnType("date")
                 .HasColumnName("dataRealizacao");
@@ -191,12 +177,8 @@ public partial class CuidadoContext : DbContext
             entity.Property(e => e.HorarioTermino)
                 .HasColumnType("time")
                 .HasColumnName("horarioTermino");
-            entity.Property(e => e.IdOrganizacao)
-                .HasColumnType("int(11)")
-                .HasColumnName("idOrganizacao");
-            entity.Property(e => e.IdResidente)
-                .HasColumnType("int(11)")
-                .HasColumnName("idResidente");
+            entity.Property(e => e.IdOrganizacao).HasColumnName("idOrganizacao");
+            entity.Property(e => e.IdResidente).HasColumnName("idResidente");
             entity.Property(e => e.TipoAtividade)
                 .HasMaxLength(30)
                 .HasColumnName("tipoAtividade");
@@ -224,9 +206,7 @@ public partial class CuidadoContext : DbContext
 
             entity.HasIndex(e => e.ResidenteId, "fk_consulta_residente1_idx");
 
-            entity.Property(e => e.Idconsulta)
-                .HasColumnType("int(11)")
-                .HasColumnName("idconsulta");
+            entity.Property(e => e.Idconsulta).HasColumnName("idconsulta");
             entity.Property(e => e.DataConsulta)
                 .HasColumnType("datetime")
                 .HasColumnName("dataConsulta");
@@ -237,18 +217,12 @@ public partial class CuidadoContext : DbContext
                 .HasMaxLength(200)
                 .HasColumnName("descricao");
             entity.Property(e => e.ExamesSolicitados).HasColumnName("examesSolicitados");
-            entity.Property(e => e.FuncionarioId)
-                .HasColumnType("int(11)")
-                .HasColumnName("funcionario_id");
-            entity.Property(e => e.IdEspecialidadeMedicina)
-                .HasColumnType("int(11)")
-                .HasColumnName("idEspecialidadeMedicina");
+            entity.Property(e => e.FuncionarioId).HasColumnName("funcionario_id");
+            entity.Property(e => e.IdEspecialidadeMedicina).HasColumnName("idEspecialidadeMedicina");
             entity.Property(e => e.MedicoResponsavel)
                 .HasMaxLength(50)
                 .HasColumnName("medicoResponsavel");
-            entity.Property(e => e.ResidenteId)
-                .HasColumnType("int(11)")
-                .HasColumnName("residente_id");
+            entity.Property(e => e.ResidenteId).HasColumnName("residente_id");
 
             entity.HasOne(d => d.Funcionario).WithMany(p => p.Consulta)
                 .HasForeignKey(d => d.FuncionarioId)
@@ -278,21 +252,13 @@ public partial class CuidadoContext : DbContext
 
             entity.HasIndex(e => e.IdResidente, "fk_cuidado_residente1_idx");
 
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.DataExecucao)
                 .HasColumnType("datetime")
                 .HasColumnName("dataExecucao");
-            entity.Property(e => e.IdFuncionario)
-                .HasColumnType("int(11)")
-                .HasColumnName("idFuncionario");
-            entity.Property(e => e.IdPlanejamentoCuidado)
-                .HasColumnType("int(11)")
-                .HasColumnName("idPlanejamentoCuidado");
-            entity.Property(e => e.IdResidente)
-                .HasColumnType("int(11)")
-                .HasColumnName("idResidente");
+            entity.Property(e => e.IdFuncionario).HasColumnName("idFuncionario");
+            entity.Property(e => e.IdPlanejamentoCuidado).HasColumnName("idPlanejamentoCuidado");
+            entity.Property(e => e.IdResidente).HasColumnName("idResidente");
 
             entity.HasOne(d => d.IdFuncionarioNavigation).WithMany(p => p.Cuidados)
                 .HasForeignKey(d => d.IdFuncionario)
@@ -316,9 +282,7 @@ public partial class CuidadoContext : DbContext
 
             entity.ToTable("especialidademedicina");
 
-            entity.Property(e => e.IdespecialidadeMedicina)
-                .HasColumnType("int(11)")
-                .HasColumnName("idespecialidadeMedicina");
+            entity.Property(e => e.IdespecialidadeMedicina).HasColumnName("idespecialidadeMedicina");
             entity.Property(e => e.NomeEspecialidade)
                 .HasMaxLength(50)
                 .HasColumnName("nomeEspecialidade");
@@ -334,21 +298,15 @@ public partial class CuidadoContext : DbContext
 
             entity.HasIndex(e => e.IdTipoExame, "fk_exame_tipoExame1_idx");
 
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.DataRealizacao)
                 .HasColumnType("datetime")
                 .HasColumnName("dataRealizacao");
             entity.Property(e => e.DataResultado)
                 .HasColumnType("datetime")
                 .HasColumnName("dataResultado");
-            entity.Property(e => e.IdConsulta)
-                .HasColumnType("int(11)")
-                .HasColumnName("idConsulta");
-            entity.Property(e => e.IdTipoExame)
-                .HasColumnType("int(11)")
-                .HasColumnName("idTipoExame");
+            entity.Property(e => e.IdConsulta).HasColumnName("idConsulta");
+            entity.Property(e => e.IdTipoExame).HasColumnName("idTipoExame");
             entity.Property(e => e.Resultado)
                 .HasMaxLength(100)
                 .HasColumnName("resultado");
@@ -372,12 +330,8 @@ public partial class CuidadoContext : DbContext
 
             entity.HasIndex(e => e.IdResidente, "fk_fonteRenda_residente1_idx");
 
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
-            entity.Property(e => e.IdResidente)
-                .HasColumnType("int(11)")
-                .HasColumnName("idResidente");
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.IdResidente).HasColumnName("idResidente");
             entity.Property(e => e.Nome)
                 .HasMaxLength(30)
                 .HasColumnName("nome");
@@ -397,9 +351,7 @@ public partial class CuidadoContext : DbContext
 
             entity.ToTable("fornecedor");
 
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Cnpj)
                 .HasMaxLength(14)
                 .HasColumnName("cnpj");
@@ -424,12 +376,8 @@ public partial class CuidadoContext : DbContext
 
             entity.HasIndex(e => e.IdOrganizacao, "fk_fornecedor_has_organizacao_organizacao1_idx");
 
-            entity.Property(e => e.IdFornecedor)
-                .HasColumnType("int(11)")
-                .HasColumnName("idFornecedor");
-            entity.Property(e => e.IdOrganizacao)
-                .HasColumnType("int(11)")
-                .HasColumnName("idOrganizacao");
+            entity.Property(e => e.IdFornecedor).HasColumnName("idFornecedor");
+            entity.Property(e => e.IdOrganizacao).HasColumnName("idOrganizacao");
             entity.Property(e => e.Observacoes)
                 .HasMaxLength(200)
                 .HasColumnName("observacoes");
@@ -453,18 +401,14 @@ public partial class CuidadoContext : DbContext
 
             entity.HasIndex(e => e.IdOrganizacao, "fk_funcionario_organizacao1_idx");
 
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Bairro)
                 .HasMaxLength(50)
                 .HasColumnName("bairro");
             entity.Property(e => e.Cargo)
                 .HasMaxLength(15)
                 .HasColumnName("cargo");
-            entity.Property(e => e.Cep)
-                .HasColumnType("int(11)")
-                .HasColumnName("cep");
+            entity.Property(e => e.Cep).HasColumnName("cep");
             entity.Property(e => e.Cidade)
                 .HasMaxLength(30)
                 .HasColumnName("cidade");
@@ -483,18 +427,14 @@ public partial class CuidadoContext : DbContext
             entity.Property(e => e.Estado)
                 .HasMaxLength(2)
                 .HasColumnName("estado");
-            entity.Property(e => e.IdOrganizacao)
-                .HasColumnType("int(11)")
-                .HasColumnName("idOrganizacao");
+            entity.Property(e => e.IdOrganizacao).HasColumnName("idOrganizacao");
             entity.Property(e => e.IdentificadorCasa)
                 .HasMaxLength(10)
                 .HasColumnName("identificadorCasa");
             entity.Property(e => e.Nome)
                 .HasMaxLength(50)
                 .HasColumnName("nome");
-            entity.Property(e => e.NumeroCasa)
-                .HasColumnType("int(11)")
-                .HasColumnName("numeroCasa");
+            entity.Property(e => e.NumeroCasa).HasColumnName("numeroCasa");
             entity.Property(e => e.PrimeiroTelefone)
                 .HasMaxLength(13)
                 .HasColumnName("primeiroTelefone");
@@ -523,9 +463,7 @@ public partial class CuidadoContext : DbContext
 
             entity.ToTable("organizacao");
 
-            entity.Property(e => e.Idorganizacao)
-                .HasColumnType("int(11)")
-                .HasColumnName("idorganizacao");
+            entity.Property(e => e.Idorganizacao).HasColumnName("idorganizacao");
             entity.Property(e => e.Cnpj)
                 .HasMaxLength(14)
                 .HasColumnName("cnpj");
@@ -544,9 +482,7 @@ public partial class CuidadoContext : DbContext
 
             entity.HasIndex(e => e.IdTipoCuidaddo, "fk_planejamentoCuidado_tipoCuidado1_idx");
 
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Continuo).HasColumnName("continuo");
             entity.Property(e => e.DataFim)
                 .HasColumnType("datetime")
@@ -560,12 +496,8 @@ public partial class CuidadoContext : DbContext
             entity.Property(e => e.FrequenciaDiaria)
                 .HasMaxLength(50)
                 .HasColumnName("frequenciaDiaria");
-            entity.Property(e => e.IdProduto)
-                .HasColumnType("int(11)")
-                .HasColumnName("idProduto");
-            entity.Property(e => e.IdTipoCuidaddo)
-                .HasColumnType("int(11)")
-                .HasColumnName("idTipoCuidaddo");
+            entity.Property(e => e.IdProduto).HasColumnName("idProduto");
+            entity.Property(e => e.IdTipoCuidaddo).HasColumnName("idTipoCuidaddo");
 
             entity.HasOne(d => d.IdProdutoNavigation).WithMany(p => p.Planejamentocuidados)
                 .HasForeignKey(d => d.IdProduto)
@@ -586,18 +518,14 @@ public partial class CuidadoContext : DbContext
 
             entity.HasIndex(e => e.IdPlanejamentoCuidado, "fk_planejamentoCuidadoDiario_planejamentoCuidado1_idx");
 
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.DiaSemana)
                 .HasColumnType("date")
                 .HasColumnName("diaSemana");
             entity.Property(e => e.Hora)
                 .HasColumnType("time")
                 .HasColumnName("hora");
-            entity.Property(e => e.IdPlanejamentoCuidado)
-                .HasColumnType("int(11)")
-                .HasColumnName("idPlanejamentoCuidado");
+            entity.Property(e => e.IdPlanejamentoCuidado).HasColumnName("idPlanejamentoCuidado");
 
             entity.HasOne(d => d.IdPlanejamentoCuidadoNavigation).WithMany(p => p.Planejamentocuidadodiarios)
                 .HasForeignKey(d => d.IdPlanejamentoCuidado)
@@ -613,24 +541,16 @@ public partial class CuidadoContext : DbContext
 
             entity.HasIndex(e => e.ResidenteId, "fk_planoAssistencia_residente1_idx");
 
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Nome)
                 .HasMaxLength(50)
                 .HasColumnName("nome");
-            entity.Property(e => e.Numero)
-                .HasColumnType("int(11)")
-                .HasColumnName("numero");
-            entity.Property(e => e.NumeroSerie)
-                .HasColumnType("int(11)")
-                .HasColumnName("numeroSerie");
+            entity.Property(e => e.Numero).HasColumnName("numero");
+            entity.Property(e => e.NumeroSerie).HasColumnName("numeroSerie");
             entity.Property(e => e.PrimeiroTelefone)
                 .HasMaxLength(13)
                 .HasColumnName("primeiroTelefone");
-            entity.Property(e => e.ResidenteId)
-                .HasColumnType("int(11)")
-                .HasColumnName("residente_id");
+            entity.Property(e => e.ResidenteId).HasColumnName("residente_id");
             entity.Property(e => e.SegundoTelefone)
                 .HasMaxLength(13)
                 .HasColumnName("segundoTelefone");
@@ -649,21 +569,13 @@ public partial class CuidadoContext : DbContext
 
             entity.HasIndex(e => e.IdResidente, "fk_planoSaude_residente1_idx");
 
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
-            entity.Property(e => e.IdResidente)
-                .HasColumnType("int(11)")
-                .HasColumnName("idResidente");
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.IdResidente).HasColumnName("idResidente");
             entity.Property(e => e.Nome)
                 .HasMaxLength(50)
                 .HasColumnName("nome");
-            entity.Property(e => e.Numero)
-                .HasColumnType("int(11)")
-                .HasColumnName("numero");
-            entity.Property(e => e.NumeroSerie)
-                .HasColumnType("int(11)")
-                .HasColumnName("numeroSerie");
+            entity.Property(e => e.Numero).HasColumnName("numero");
+            entity.Property(e => e.NumeroSerie).HasColumnName("numeroSerie");
             entity.Property(e => e.PrimeiroTelefone)
                 .HasMaxLength(13)
                 .HasColumnName("primeiroTelefone");
@@ -685,15 +597,11 @@ public partial class CuidadoContext : DbContext
 
             entity.HasIndex(e => e.IdOrganizacao, "fk_produto_organizacao1_idx");
 
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Classificacao)
                 .HasMaxLength(30)
                 .HasColumnName("classificacao");
-            entity.Property(e => e.IdOrganizacao)
-                .HasColumnType("int(11)")
-                .HasColumnName("idOrganizacao");
+            entity.Property(e => e.IdOrganizacao).HasColumnName("idOrganizacao");
             entity.Property(e => e.Nome)
                 .HasMaxLength(50)
                 .HasColumnName("nome");
@@ -714,9 +622,7 @@ public partial class CuidadoContext : DbContext
 
             entity.HasIndex(e => e.IdOrganizacao, "fk_residente_organizacao1_idx");
 
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CertidaoNascimento)
                 .HasMaxLength(32)
                 .HasColumnName("certidaoNascimento");
@@ -744,12 +650,8 @@ public partial class CuidadoContext : DbContext
             entity.Property(e => e.GrauEscolaridade)
                 .HasColumnType("enum('Fundamental Incompleto','Fundamental Completo','Médio Incompleto','Médio Completo','Superior Incompleto','Superior Completo','Pós-graduação','Mestrado','Doutorado')")
                 .HasColumnName("grauEscolaridade");
-            entity.Property(e => e.IdFuncionario)
-                .HasColumnType("int(11)")
-                .HasColumnName("idFuncionario");
-            entity.Property(e => e.IdOrganizacao)
-                .HasColumnType("int(11)")
-                .HasColumnName("idOrganizacao");
+            entity.Property(e => e.IdFuncionario).HasColumnName("idFuncionario");
+            entity.Property(e => e.IdOrganizacao).HasColumnName("idOrganizacao");
             entity.Property(e => e.Interditado)
                 .HasColumnType("enum('0','1')")
                 .HasColumnName("interditado");
@@ -768,9 +670,7 @@ public partial class CuidadoContext : DbContext
             entity.Property(e => e.NumeroSus)
                 .HasMaxLength(15)
                 .HasColumnName("numeroSus");
-            entity.Property(e => e.QuantidadeFilhos)
-                .HasColumnType("int(11)")
-                .HasColumnName("quantidadeFilhos");
+            entity.Property(e => e.QuantidadeFilhos).HasColumnName("quantidadeFilhos");
             entity.Property(e => e.Rg)
                 .HasMaxLength(9)
                 .HasColumnName("rg");
@@ -796,15 +696,11 @@ public partial class CuidadoContext : DbContext
 
             entity.HasIndex(e => e.Nome, "idx_nome");
 
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Bairro)
                 .HasMaxLength(50)
                 .HasColumnName("bairro");
-            entity.Property(e => e.Cep)
-                .HasColumnType("int(11)")
-                .HasColumnName("cep");
+            entity.Property(e => e.Cep).HasColumnName("cep");
             entity.Property(e => e.Cidade)
                 .HasMaxLength(30)
                 .HasColumnName("cidade");
@@ -817,18 +713,14 @@ public partial class CuidadoContext : DbContext
             entity.Property(e => e.Estado)
                 .HasMaxLength(2)
                 .HasColumnName("estado");
-            entity.Property(e => e.IdResidente)
-                .HasColumnType("int(11)")
-                .HasColumnName("idResidente");
+            entity.Property(e => e.IdResidente).HasColumnName("idResidente");
             entity.Property(e => e.Identificador)
                 .HasMaxLength(10)
                 .HasColumnName("identificador");
             entity.Property(e => e.Nome)
                 .HasMaxLength(50)
                 .HasColumnName("nome");
-            entity.Property(e => e.NumeroCasa)
-                .HasColumnType("int(11)")
-                .HasColumnName("numeroCasa");
+            entity.Property(e => e.NumeroCasa).HasColumnName("numeroCasa");
             entity.Property(e => e.PrimeiroTelefone)
                 .HasMaxLength(13)
                 .HasColumnName("primeiroTelefone");
@@ -857,9 +749,7 @@ public partial class CuidadoContext : DbContext
 
             entity.ToTable("tipocuidado");
 
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Categoria)
                 .HasMaxLength(30)
                 .HasColumnName("categoria");
@@ -876,15 +766,11 @@ public partial class CuidadoContext : DbContext
 
             entity.HasIndex(e => e.IdResidente, "fk_tipoExame_residente1_idx");
 
-            entity.Property(e => e.IdtipoExame)
-                .HasColumnType("int(11)")
-                .HasColumnName("idtipoExame");
+            entity.Property(e => e.IdtipoExame).HasColumnName("idtipoExame");
             entity.Property(e => e.Descricao)
                 .HasMaxLength(100)
                 .HasColumnName("descricao");
-            entity.Property(e => e.IdResidente)
-                .HasColumnType("int(11)")
-                .HasColumnName("idResidente");
+            entity.Property(e => e.IdResidente).HasColumnName("idResidente");
             entity.Property(e => e.NomeExame)
                 .HasMaxLength(50)
                 .HasColumnName("nomeExame");
@@ -904,9 +790,7 @@ public partial class CuidadoContext : DbContext
 
             entity.ToTable("visitante");
 
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Cpf)
                 .HasMaxLength(11)
                 .HasColumnName("cpf");
@@ -931,21 +815,15 @@ public partial class CuidadoContext : DbContext
 
             entity.HasIndex(e => e.IdVisitante, "fk_visita_visitante1_idx");
 
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.DataVisita)
                 .HasColumnType("date")
                 .HasColumnName("dataVisita");
             entity.Property(e => e.HorarioVisita)
                 .HasColumnType("time")
                 .HasColumnName("horarioVisita");
-            entity.Property(e => e.IdResidente)
-                .HasColumnType("int(11)")
-                .HasColumnName("idResidente");
-            entity.Property(e => e.IdVisitante)
-                .HasColumnType("int(11)")
-                .HasColumnName("idVisitante");
+            entity.Property(e => e.IdResidente).HasColumnName("idResidente");
+            entity.Property(e => e.IdVisitante).HasColumnName("idVisitante");
 
             entity.HasOne(d => d.IdResidenteNavigation).WithMany(p => p.Visita)
                 .HasForeignKey(d => d.IdResidente)
