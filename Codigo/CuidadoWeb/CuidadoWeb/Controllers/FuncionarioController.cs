@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Core;
+using Core.DTO;
 using Core.Service;
 using CuidadoWeb.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace CuidadoWeb.Controllers
 {
@@ -90,5 +92,21 @@ namespace CuidadoWeb.Controllers
 			this.funcionarioService.Delete(id);
 			return RedirectToAction(nameof(Index));
 		}
+
+		public async Task<IActionResult> BuscarFuncionarioPorCpf(string cpf)
+		{
+			if (string.IsNullOrEmpty(cpf) || cpf.Length < 11)
+			{
+				return BadRequest("CPF inválido.");
+			}
+			var funcionario = await this.funcionarioService.BuscarFuncionarioPorCpf(cpf);
+			if (funcionario == null)
+			{
+				return BadRequest("Funcionário não encontrado.");
+			}
+			var funcionarioModel = this.mapper.Map<FuncionarioViewModel>(funcionario);
+			return PartialView("BuscarFuncionarioPorCpf", funcionarioModel);
+		}
 	}
 }
+

@@ -47,6 +47,8 @@
     flex-flow: row;
     align-items: center;
     transition: padding 0.3s ease;
+    text-decoration: none;
+    color: var(--black);
 }
 
 .app-sidebar .button:hover {
