@@ -9,9 +9,7 @@
 * {
     margin: 0px;
     padding: 0px;
-
     min-width: 0px;
-
     box-sizing: border-box;
 }
 
@@ -19,17 +17,13 @@
     /* Application default colors */
     --primary: #4E73DF;
     --primary-dark: #284096;
-
     --secondary: #CCD9EB;
     --secondary-dark: #768CA9;
-
     --error: #DF4E4E;
     --error-dark: #7A1B1B;
-
     /* Gray scale */
     --white: #FFFFFF;
     --black: #09090B;
-
     --gray-3: #F1F1F1;
     --gray-2: #D9D9D9;
     --gray-1: #434242;
@@ -43,9 +37,7 @@ html {
 body {
     width: 100%;
     height: 100%;
-
     background-color: var(--gray-3);
-
     font-family: "DM Sans";
     font-weight: normal;
 }
@@ -57,7 +49,6 @@ body {
     font-family: "DM Sans";
     font-size: 24px;
     font-weight: 700 /* bold */;
-
     line-height: normal;
     letter-spacing: -5%;
 }
@@ -66,7 +57,6 @@ body {
     font-family: "DM Sans";
     font-size: 20px;
     font-weight: 700 /* bold */;
-
     line-height: normal;
     letter-spacing: -5%;
 }
@@ -75,7 +65,6 @@ body {
     font-family: "DM Sans";
     font-size: 18px;
     font-weight: 700 /* bold */;
-
     line-height: normal;
     letter-spacing: -5%;
 }
@@ -84,7 +73,6 @@ body {
     font-family: "DM Sans";
     font-size: 16px;
     font-weight: 500 /* medium */;
-
     line-height: normal;
     letter-spacing: -5%;
 }
@@ -93,7 +81,6 @@ body {
     font-family: "DM Sans";
     font-size: 18px;
     font-weight: 400 /* normal */;
-
     line-height: 120%;
     letter-spacing: -5%;
 }
@@ -102,7 +89,6 @@ body {
     font-family: "DM Sans";
     font-size: 16px;
     font-weight: 400 /* normal */;
-
     line-height: 120%;
     letter-spacing: -5%;
 }
@@ -111,7 +97,6 @@ body {
     font-family: "DM Sans";
     font-size: 14px;
     font-weight: 400 /* normal */;
-
     line-height: 120%;
     letter-spacing: -5%;
 }
@@ -120,7 +105,6 @@ body {
     font-family: "DM Sans";
     font-size: 12px;
     font-weight: 400 /* normal */;
-
     line-height: 120%;
     letter-spacing: -5%;
 }
@@ -129,14 +113,12 @@ body {
     font-family: "DM Sans";
     font-size: 16px;
     font-weight: 500 /* normal */;
-
     line-height: normal;
     letter-spacing: -5%;
 }
 
 .app-main-content {
     position: relative;
-
     width: 100%;
     height: calc(100% - 6em);
 }
@@ -144,11 +126,83 @@ body {
 .app-logo-bg {
     height: 13em;
     width: 46em;
-
     transform: translate(-50%, -50%);
-
+    opacity: 37%;
     position: absolute;
     top: 50%;
     left: 50%;
 }
 
+/* Visitante-create */
+.Visitante-create {
+    display: flex;
+    justify-content: center;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.visitante-create-h4 {
+    display: flex;
+    justify-content: center;
+    color: var(--black);
+    margin-bottom: 15px;
+    font-size: 25px;
+}
+
+.row-visitante-create {
+    display: flex;
+    justify-content: center;
+}
+
+.col-md-4-visitante {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-group-visitante {
+    margin-bottom: 15px;
+}
+
+.form-control-visitante {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background-color: var(--secondary);
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.control-label {
+    color: var(--primary);
+}
+/*botoes visitante*/
+.btn-visitante {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 40px;
+    gap: 10px;
+}
+
+.btn-salvar-visitante {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    background-color: #4E73DF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-cancelar-visitante {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    background-color: #DF4E4E;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
