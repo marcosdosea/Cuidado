@@ -178,7 +178,7 @@ body {
 .control-label {
     color: var(--primary);
 }
-
+/*botoes visitante*/
 .btn-visitante {
     display: flex;
     justify-content: flex-end;
