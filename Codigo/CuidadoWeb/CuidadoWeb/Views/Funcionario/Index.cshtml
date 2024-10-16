@@ -4,140 +4,278 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<style>
+    :root {
+        --title-color: #4E6EDF;
+        --func-color: #3254BA;
+        --th-color: #ACBAD0;
+        --default-color: #A7C3D9;
+    }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cpf)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataNascimento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataAdmissao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cargo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Salario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumeroCasa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdentificadorCasa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rua)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bairro)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cep)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Complemento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrimeiroTelefone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SegundoTelefone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdOrganizacao)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cpf)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataNascimento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataAdmissao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cargo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Salario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumeroCasa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdentificadorCasa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rua)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bairro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cep)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Complemento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrimeiroTelefone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SegundoTelefone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdOrganizacao)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    .text-strong {
+        color: var(--func-color);
+    }
+
+    .text-low {
+        color: var(--title-color);
+    }
+
+    #text-title {
+        font-size: 3em;
+        font-weight: bold;
+    }
+
+    #text-action-title {
+        font-size: 2.2em;
+        margin-left: -100px;
+    }
+
+    table thead th {
+        background-color: var(--th-color) !important;
+    }
+
+    hr {
+        border: 1px solid #434242;
+        margin: 1rem 0;
+    }
+
+    #filtrar, .btn-custom {
+        background-color: var(--default-color);
+        color: #000;
+    }
+
+    #filtrar, input::placeholder {
+        color: black !important;
+    }
+
+    table tr:nth-child(even) {
+        background-color: var(--default-color);
+        color: black;
+    }
+
+    table tr:nth-child(odd) {
+        background-color: white;
+        color: black;
+    }
+
+    table tr:hover {
+        background-color: var(--title-color);
+        color: white !important;
+    }
+
+    .btn-custom {
+        border-color: black;
+    }
+
+        .btn-custom:focus,
+        .btn-custom:active {
+            background-color: transparent !important;
+            color: black;
+            border-color: black;
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5);
+        }
+
+        #filtrar:hover, .btn-custom:hover {
+            background-color: transparent;
+            color: black;
+            border-color: black;
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5);
+        }
+
+    .form-control:focus {
+        background-color: white !important;
+        color: #000;
+        border-color: var(--default-color);
+        box-shadow: none;
+    }
+
+    .column-action {
+        padding: 0;
+        width: 170px; /* Adicionado aqui para manter a largura */
+    }
+
+        .column-action .btn {
+            border: none;
+            background: transparent;
+        }
+
+            .column-action .btn:hover {
+                background: #000;
+                color: #fff;
+            }
+
+    .red {
+        color: red;
+    }
+
+    #funcionario-text {
+        font-size: 1.5em;
+    }
+
+    #diretor-text {
+        color: #000;
+        font-style: italic;
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<main class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-low" id="text-title">CUIDADO+</h2>
+        <h3 class="text-center text-low" id="text-action-title">Lista de Funcionários</h3>
+        <div class="text-end d-block">
+            <span class="text-strong" id="funcionario-text">FUNCIONÁRIO</span><br>
+            <span class="text-low" id="diretor-text">Diretor</span>
+        </div>
+
+    </div>
+    <hr>
+    <div class="d-flex justify-content-between mb-3">
+        <div>
+            <button class="btn form-control btn-custom dropdown-toggle" id="filtrar" type="button" data-bs-toggle="dropdown" aria-expanded="false">Filtrar por</button>
+        </div>
+        <div class="input-group w-25 justify-content-end border-dark">
+            <input type="text" id="cpfInput" class="form-control border-dark btn-custom" placeholder="Pesquisar por CPF" aria-label="Pesquisar">
+            <button class="btn btn-custom" type="button" onclick="buscarFuncionario()">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-low">@Html.DisplayNameFor(model => model.Nome)</th>
+                    <th class="text-low">@Html.DisplayNameFor(model => model.Cargo)</th>
+                    <th class="text-low">@Html.DisplayNameFor(model => model.Status)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Cargo)</td>
+                        <td>
+                            @if (item.Status.Equals("1"))
+                            {
+                                <span>Ativo</span>
+                            }
+                            else
+                            {
+                                <span>Inativo</span>
+                            }
+                        </td>
+                        <td class="text-center column-action">
+                            <a href="@Url.Action("Edit", "Funcionario", new { id = item.Id })" class="btn btn-sm btn-primary" title="Editar">
+                                <i class="fas fa-pencil-alt text-strong"></i>
+                            </a>
+                            <a href="@Url.Action("Details", "Funcionario", new { id = item.Id })" class="btn btn-sm btn-info" title="Detalhes">
+                                <i class="fas fa-eye text-low"></i>
+                            </a>
+                            <a href="@Url.Action("Delete", "Funcionario", new { id = item.Id })" class="btn btn-sm btn-danger" title="Excluir">
+                                <i class="fas fa-trash red"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <div>
+            <button class="btn btn-secondary" style="display: none;">Voltar</button>
+        </div>
+        <div class="ms-auto">
+            <a asp-action="Create" class="btn btn-primary">Novo Funcionário</a>
+        </div>
+    </div>
+
+
+</main>
+<!--Modal Error-->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Erro</h5>
+                <button type="button" class="btn-close" aria-label="Fechar" onclick="window.location.reload();"></button>
+            </div>
+            <div class="modal-body">
+                <p id="errorModalMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <a href="@Url.Action("Index", "Funcionario")" class="btn btn-secondary">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let tabelaAtual = '';
+
+    window.onload = function () {
+        tabelaAtual = document.querySelector('table tbody').innerHTML;
+    }
+
+    function buscarFuncionario() {
+        const cpf = document.getElementById('cpfInput').value.trim();
+        const tbody = document.querySelector('table tbody');
+
+        if (!cpf) {
+            tbody.innerHTML = tabelaAtual;
+            removerBotaoVoltar();
+            return;
+        }
+
+        fetch(`/Funcionario/BuscarFuncionarioPorCpf?cpf=${cpf}`)
+            .then(resposta => {
+                if (resposta.ok) {
+                    return resposta.text();
+                } else {
+                    return Promise.reject('Funcionário não encontrado ou CPF inválido.');
+                }
+            })
+            .then(dados => {
+                tbody.innerHTML = dados;
+                addBotaoVoltar();
+            })
+            .catch(erro => {
+                mostrarErro(erro);
+            });
+    }
+
+    document.getElementById('cpfInput').addEventListener('input', function () {
+        if (!this.value.trim()) {
+            document.querySelector('table tbody').innerHTML = tabelaAtual;
+            removerBotaoVoltar();
+        }
+    });
+
+    function mostrarErro(mensagem) {
+        document.getElementById('errorModalMessage').textContent = mensagem;
+        new bootstrap.Modal(document.getElementById('errorModal')).show();
+    }
+
+    function addBotaoVoltar() {
+        if (!document.getElementById('botaoVoltar')) {
+            const botaoVoltar = document.createElement('button');
+            botaoVoltar.textContent = 'Voltar';
+            botaoVoltar.className = 'btn btn-secondary ms-2';
+            botaoVoltar.id = 'botaoVoltar';
+            botaoVoltar.onclick = function () {
+                document.querySelector('table tbody').innerHTML = tabelaAtual;
+                this.remove();
+                document.getElementById('cpfInput').value = '';
+            };
+            document.querySelector('.d-flex.justify-content-between.align-items-center.mt-3').appendChild(botaoVoltar);
+        }
+    }
+
+    function removerBotaoVoltar() {
+        const botaoVoltar = document.getElementById('botaoVoltar');
+        if (botaoVoltar) { 
+            botaoVoltar.remove(); 
+        }
+    }
+</script>
