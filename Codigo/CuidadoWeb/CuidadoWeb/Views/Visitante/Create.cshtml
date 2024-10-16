@@ -4,40 +4,40 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1 class="Visitante-create">Registrar novo Visitante</h1>
 
-<h4>VisitanteViewModel</h4>
+<h4 class="visitante-create-h4">Dados Do visitante</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="row-visitante-create">
+    <div class="col-md-4-visitante">
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div asp-validation-summary="ModelOnly" class="text-danger-visitante"></div>
+            <div class="form-group-visitante">
                 <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
+                <input asp-for="Id" class="form-control-visitante input-pequeno" />
+                <span asp-validation-for="Id" class="text-danger-visitante"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group-visitante">
                 <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
+                <input asp-for="Nome" class="form-control-visitante input-grande" />
+                <span asp-validation-for="Nome" class="text-danger-visitante"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group-visitante">
                 <label asp-for="Cpf" class="control-label"></label>
-                <input asp-for="Cpf" class="form-control" />
-                <span asp-validation-for="Cpf" class="text-danger"></span>
+                <input asp-for="Cpf" class="form-control-visitante input-pequeno" />
+                <span asp-validation-for="Cpf" class="text-danger-visitante"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group-visitante">
                 <label asp-for="PrimeiroTelefone" class="control-label"></label>
-                <input asp-for="PrimeiroTelefone" class="form-control" />
-                <span asp-validation-for="PrimeiroTelefone" class="text-danger"></span>
+                <input asp-for="PrimeiroTelefone" class="form-control-visitante input-pequeno" />
+                <span asp-validation-for="PrimeiroTelefone" class="text-danger-visitante"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group-visitante">
                 <label asp-for="SegundoTelefone" class="control-label"></label>
-                <input asp-for="SegundoTelefone" class="form-control" />
-                <span asp-validation-for="SegundoTelefone" class="text-danger"></span>
+                <input asp-for="SegundoTelefone" class="form-control-visitante input-pequeno" />
+                <span asp-validation-for="SegundoTelefone" class="text-danger-visitante input-pequeno"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group-visitante">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
