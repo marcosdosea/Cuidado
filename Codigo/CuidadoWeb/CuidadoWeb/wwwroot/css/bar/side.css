@@ -1,0 +1,57 @@
+.app-sidebar {
+    position: absolute;
+    top: 6em /* 6em come from header height */;
+    left: 0;
+    bottom: 0;
+
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    padding: 2.5em 0.75em;
+
+    background-color: var(--secondary);
+    z-index: 10;
+}
+
+.app-sidebar:hover .button .label {
+    display: inline;
+}
+
+/* Parts of the side bar */
+.app-sidebar .top-container,
+.app-sidebar .bottom-container {
+    display: flex;
+    gap: 2em;
+    flex-flow: column;
+}
+
+/* Button component */
+.app-sidebar .button {
+    cursor: pointer;
+    display: flex;
+    gap: 1em;
+    flex-flow: row;
+    align-items: center;
+}
+
+.app-sidebar .button:hover {
+    color: var(--primary);
+    padding: 0.5em 1.25em;
+    border-radius: 1.25em;
+    background-color: var(--white);
+}
+
+.app-sidebar .button .icon {
+    font-size: 3em;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.app-sidebar .button .label {
+    display: none;
+}
+

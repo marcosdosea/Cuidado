@@ -3,7 +3,6 @@ using Core;
 using Core.DTO;
 using Core.Service;
 using CuidadoWeb.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 

@@ -1,0 +1,154 @@
+/**
+ * Section to insert styles for other components!!
+ */
+@import url("./bar/style.css");
+
+/**
+ * This file is for global styles only!!
+ */
+* {
+    margin: 0px;
+    padding: 0px;
+
+    min-width: 0px;
+
+    box-sizing: border-box;
+}
+
+:root {
+    /* Application default colors */
+    --primary: #4E73DF;
+    --primary-dark: #284096;
+
+    --secondary: #CCD9EB;
+    --secondary-dark: #768CA9;
+
+    --error: #DF4E4E;
+    --error-dark: #7A1B1B;
+
+    /* Gray scale */
+    --white: #FFFFFF;
+    --black: #09090B;
+
+    --gray-3: #F1F1F1;
+    --gray-2: #D9D9D9;
+    --gray-1: #434242;
+}
+
+html {
+    width: 100vw;
+    height: 100vh;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--gray-3);
+
+    font-family: "DM Sans";
+    font-weight: normal;
+}
+
+/**
+ * Typography
+ */
+.app-text-h-lg {
+    font-family: "DM Sans";
+    font-size: 24px;
+    font-weight: 700 /* bold */;
+
+    line-height: normal;
+    letter-spacing: -5%;
+}
+
+.app-text-h-md {
+    font-family: "DM Sans";
+    font-size: 20px;
+    font-weight: 700 /* bold */;
+
+    line-height: normal;
+    letter-spacing: -5%;
+}
+
+.app-text-h-sm {
+    font-family: "DM Sans";
+    font-size: 18px;
+    font-weight: 700 /* bold */;
+
+    line-height: normal;
+    letter-spacing: -5%;
+}
+
+.app-text-h-xs {
+    font-family: "DM Sans";
+    font-size: 16px;
+    font-weight: 500 /* medium */;
+
+    line-height: normal;
+    letter-spacing: -5%;
+}
+
+.app-text-b-lg {
+    font-family: "DM Sans";
+    font-size: 18px;
+    font-weight: 400 /* normal */;
+
+    line-height: 120%;
+    letter-spacing: -5%;
+}
+
+.app-text-b-md {
+    font-family: "DM Sans";
+    font-size: 16px;
+    font-weight: 400 /* normal */;
+
+    line-height: 120%;
+    letter-spacing: -5%;
+}
+
+.app-text-b-sm {
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-weight: 400 /* normal */;
+
+    line-height: 120%;
+    letter-spacing: -5%;
+}
+
+.app-text-b-xs {
+    font-family: "DM Sans";
+    font-size: 12px;
+    font-weight: 400 /* normal */;
+
+    line-height: 120%;
+    letter-spacing: -5%;
+}
+
+.app-text-btn {
+    font-family: "DM Sans";
+    font-size: 16px;
+    font-weight: 500 /* normal */;
+
+    line-height: normal;
+    letter-spacing: -5%;
+}
+
+.app-main-content {
+    position: relative;
+
+    width: 100%;
+    height: calc(100% - 6em);
+}
+
+.app-logo-bg {
+    height: 13em;
+    width: 46em;
+
+    transform: translate(-50%, -50%);
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
