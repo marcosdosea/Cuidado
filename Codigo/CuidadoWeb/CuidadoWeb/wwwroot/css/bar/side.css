@@ -13,18 +13,29 @@
 
     background-color: var(--secondary);
     z-index: 10;
+
+    width: 4.5em;
+    transition: width 0.3s ease;
+}
+
+.app-sidebar:hover {
+    width: 19.25em;
 }
 
 .app-sidebar:hover .button .label {
-    display: inline;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0%);
+    transition: opacity 0.3s ease, transform 0.5s ease;
+    transition-delay: 0.15s;
 }
 
 /* Parts of the side bar */
-.app-sidebar .top-container,
-.app-sidebar .bottom-container {
+.app-sidebar .container {
     display: flex;
     gap: 2em;
     flex-flow: column;
+    width: 100%;
 }
 
 /* Button component */
@@ -32,8 +43,10 @@
     cursor: pointer;
     display: flex;
     gap: 1em;
+    padding: 0.5em 0em;
     flex-flow: row;
     align-items: center;
+    transition: padding 0.3s ease;
     text-decoration: none;
     color: var(--black);
 }
@@ -42,18 +55,17 @@
     color: var(--primary);
     padding: 0.5em 1.25em;
     border-radius: 1.25em;
-    background-color: var(--white);
+    background-color: var(--gray-3);
 }
 
 .app-sidebar .button .icon {
     font-size: 3em;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .app-sidebar .button .label {
-    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-100%);
+    transition: opacity 0.3s ease;
 }
 
