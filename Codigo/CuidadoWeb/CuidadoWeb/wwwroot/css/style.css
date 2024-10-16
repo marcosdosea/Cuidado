@@ -13,6 +13,7 @@
     min-width: 0px;
 
     box-sizing: border-box;
+
 }
 
 :root {
@@ -144,7 +145,7 @@ body {
 .app-logo-bg {
     height: 13em;
     width: 46em;
-
+    opacity:39%;
     transform: translate(-50%, -50%);
 
     position: absolute;
@@ -152,3 +153,52 @@ body {
     left: 50%;
 }
 
+
+/* Visitante-create */
+.Visitante-create {
+    display: flex;
+    justify-content: center;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.visitante-create-h4 {
+    display: flex;
+    justify-content: center;
+    color: var(--black);
+    margin-bottom: 15px;
+    font-size: 25px;
+}
+
+.row-visitante-create {
+    display: flex;
+    justify-content: center;
+}
+
+.col-md-4-visitante {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-group-visitante {
+    margin-bottom: 15px;
+}
+
+.form-control-visitante {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background-color: var(--secondary);
+}
+.input grande{
+    width:100px;
+}
+.input pequeno{
+    width:50px;
+}
+.control-label{
+    color: var(--primary);
+}
