@@ -26,6 +26,7 @@ namespace CuidadoWeb
             builder.Services.AddTransient<IProdutoService, ProdutoService>();
             builder.Services.AddTransient<IFuncionarioService, FuncionarioService>();
             builder.Services.AddTransient<IVisitanteService, VisitanteService>();
+            builder.Services.AddTransient<IVisitaService, VisitaService>();
 
             var app = builder.Build();
 
