@@ -2,6 +2,8 @@ using Core.Service;
 using Core;
 using Microsoft.EntityFrameworkCore;
 using Service;
+using CuidadoWeb.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace CuidadoWeb
 {
@@ -21,6 +23,11 @@ namespace CuidadoWeb
             {
                 options.UseMySQL(connectionString);
             });
+
+            builder.Services.AddDbContext<IdentityContext>(
+                options => options.UseMySQL(builder.Configuration.GetConnectionString("IdentityDatabase")));
+
+            builder.Services.AddDefaultIdentity<UsuarioIdentity>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<IdentityContext>();
 
             builder.Services.AddTransient<ICuidadoService, CuidadoService>();
             builder.Services.AddTransient<IProdutoService, ProdutoService>();
