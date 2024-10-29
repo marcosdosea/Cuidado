@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{B88694A5-408C-4424-BCB1-169DEB9AAEA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util", "Util\Util.csproj", "{D853F319-F867-4508-9F73-1AC420B0A16C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Util", "Util\Util.csproj", "{D853F319-F867-4508-9F73-1AC420B0A16C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceTests", "ServiceTests\ServiceTests.csproj", "{80E22301-9D9F-4C9B-A3BA-87D2758C15D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D853F319-F867-4508-9F73-1AC420B0A16C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D853F319-F867-4508-9F73-1AC420B0A16C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D853F319-F867-4508-9F73-1AC420B0A16C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80E22301-9D9F-4C9B-A3BA-87D2758C15D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80E22301-9D9F-4C9B-A3BA-87D2758C15D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80E22301-9D9F-4C9B-A3BA-87D2758C15D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80E22301-9D9F-4C9B-A3BA-87D2758C15D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

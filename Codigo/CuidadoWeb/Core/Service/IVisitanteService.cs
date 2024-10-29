@@ -1,4 +1,6 @@
-﻿namespace Core.Service
+﻿using System.Data;
+
+namespace Core.Service
 {
     public interface IVisitanteService
     {
@@ -7,5 +9,7 @@
         void Delete(int id);
         Visitante? Get(int id);
         IEnumerable<Visitante> GetAll();
+  
+
     }
 }
