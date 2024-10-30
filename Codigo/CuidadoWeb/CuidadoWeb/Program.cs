@@ -58,7 +58,7 @@ namespace CuidadoWeb
             builder.Services.ConfigureApplicationCookie(options =>
             {
                 //options.AccessDeniedPath = "/Identity/Autenticar";
-                options.Cookie.Name = "BibliotecaCookieName";
+                options.Cookie.Name = "CuidadoCookieName";
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
                 //options.LoginPath = "/Identity/Autenticar";
