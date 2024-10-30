@@ -1,4 +1,6 @@
-﻿namespace Core.Service
+﻿using System.Data;
+
+namespace Core.Service
 {
     public interface IVisitanteService
     {
