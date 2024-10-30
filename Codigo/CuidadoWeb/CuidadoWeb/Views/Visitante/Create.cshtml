@@ -3,11 +3,10 @@
 @{
     ViewData["Title"] = "Create";
 }
-
+<div class="visitante-geral">  
 <h1 class="Visitante-create" alt="titulo">Registrar novo Visitante</h1>
 
 <h4 class="visitante-create-h4" alt="titulo 2">Dados Do visitante</h4>
-<hr />
 <div class="row-visitante-create">
     <div class="col-md-4-visitante">
         <form asp-action="Create">
@@ -46,7 +45,7 @@
     <button type="button" class="btn-cancelar-visitante" onclick="window.location.href='@Url.Action("Index")'" alt="botao cancelar">Cancelar</button>
 
 </div>
-
+</div>
 
 @section Scripts {
     @{
