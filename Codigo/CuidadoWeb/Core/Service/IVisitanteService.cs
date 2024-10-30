@@ -9,7 +9,5 @@ namespace Core.Service
         void Delete(int id);
         Visitante? Get(int id);
         IEnumerable<Visitante> GetAll();
-  
-
     }
 }
