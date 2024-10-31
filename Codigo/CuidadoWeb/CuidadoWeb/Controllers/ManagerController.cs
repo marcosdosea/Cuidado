@@ -8,5 +8,10 @@ namespace CuidadoWeb.Controllers
         {
             return View();
         }
+
+        public ActionResult Operations()
+        {
+            return View();
+        }
     }
 }
