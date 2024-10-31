@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Manager Page";
+
+    var cards = new List<CardViewModel>
+    {
+        new CardViewModel { Title = "Buscar", Icon = "magnifying-glass",
+    Action="" },
+        new CardViewModel { Title = "Novo", Icon = "plus",
+    Action="" },
+        new CardViewModel { Title = "Excluir", Icon = "trash",
+    Action=""},
+        new CardViewModel { Title = "Alterar", Icon = "pencil",
+    Action="" },
+    };
+}
+
+<div class="manager-cards">
+    <div class="row">
+        <partial name="_Card.cshtml" model="cards[0]">
+        <partial name="_Card.cshtml" model="cards[1]">
+    </div>
+    <div class="row">
+        <partial name="_Card.cshtml" model="cards[2]">
+        <partial name="_Card.cshtml" model="cards[3]">
+    </div>
+</div>
+
