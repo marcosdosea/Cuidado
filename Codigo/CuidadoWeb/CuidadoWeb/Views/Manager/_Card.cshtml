@@ -1,0 +1,8 @@
+@model CardViewModel;
+
+<a class="card" asp-controller="Manager" asp-action="Operations"
+    aps-route-target="@Model.Action">
+    <p class="title app-text-h-lg">@Model.Title</p>
+    <i class="icon ph ph-@Model.Icon"></i>
+</a>
+

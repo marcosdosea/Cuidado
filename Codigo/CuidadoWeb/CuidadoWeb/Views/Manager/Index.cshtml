@@ -1,4 +1,43 @@
 ﻿@{
     ViewData["Title"] = "Manager Page";
+
+    var cards = new List<CardViewModel>
+    {
+        new CardViewModel { Title = "Organização", Icon = "bank",
+    Action="Organizacao" },
+        new CardViewModel { Title = "Funcionário", Icon = "hard-hat",
+    Action="Funcionario" },
+        new CardViewModel { Title = "Responsável", Icon = "identification-card",
+    Action="Responsavel"},
+        new CardViewModel { Title = "Residente", Icon = "user-plus",
+    Action="Residente" },
+        new CardViewModel { Title = "Cuidado", Icon = "hand-heart",
+    Action="Cuidado" },
+        new CardViewModel { Title = "Consulta", Icon = "clipboard-text",
+    Action="Consulta" },
+        new CardViewModel { Title = "Produto", Icon = "shopping-cart",
+    Action="Produto" },
+        new CardViewModel { Title = "Visitante", Icon = "plus",
+    Action="Visitante" },
+        new CardViewModel { Title = "Visita", Icon = "plus", Action="Visita" },
+    };
 }
+
+<div class="manager-cards">
+    <div class="row">
+        <partial name="_Card.cshtml" model="cards[0]">
+        <partial name="_Card.cshtml" model="cards[1]">
+        <partial name="_Card.cshtml" model="cards[2]">
+    </div>
+    <div class="row">
+        <partial name="_Card.cshtml" model="cards[3]">
+        <partial name="_Card.cshtml" model="cards[4]">
+        <partial name="_Card.cshtml" model="cards[5]">
+        <partial name="_Card.cshtml" model="cards[6]">
+    </div>
+    <div class="row">
+        <partial name="_Card.cshtml" model="cards[7]">
+        <partial name="_Card.cshtml" model="cards[8]">
+    </div>
+</div>
 
