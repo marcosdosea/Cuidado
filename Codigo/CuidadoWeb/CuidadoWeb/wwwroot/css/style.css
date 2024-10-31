@@ -135,6 +135,15 @@ body {
 }
 
 /* Visitante-create */
+.visitante-geral {
+    height: calc(100vh - 6em);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 5px -5px black;
+}
+
 .Visitante-create {
     display: flex;
     justify-content: center;
@@ -174,6 +183,7 @@ body {
     background-color: var(--secondary);
     width: 100%;
     margin-bottom: 10px;
+    box-shadow: 2px 2px 5px -5px black;
 }
 
 .control-label {
@@ -183,7 +193,7 @@ body {
 .btn-visitante {
     display: flex;
     justify-content: flex-end;
-    margin-top: 40px;
+    margin-top: 10px;
     gap: 10px;
 }
 

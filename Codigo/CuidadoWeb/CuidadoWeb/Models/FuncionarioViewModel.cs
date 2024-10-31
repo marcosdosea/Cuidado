@@ -58,7 +58,7 @@ namespace CuidadoWeb.Models
 
 		[Required(ErrorMessage = "Campo requerido")]
 		[StringLength(8, MinimumLength = 8, ErrorMessage = "O CEP deve ter 8 dígitos")]
-		public string Cep { get; set; }
+		public int Cep { get; set; }
 
 		public string? Complemento { get; set; }
 
