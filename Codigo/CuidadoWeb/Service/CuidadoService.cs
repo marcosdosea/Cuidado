@@ -32,7 +32,7 @@ namespace Service
         /// <param name="id"></param>
         public void Delete(int id)
         {
-            var cuidado = this.context.Cuidados.Find(id);
+            var cuidado = this.context.Cuidado.Find(id);
 
             if (cuidado != null)
             {
@@ -58,7 +58,7 @@ namespace Service
         /// <returns>Dados do cuidado</returns>
         public Cuidado? Get(int id)
         {
-            return this.context.Cuidados.Find(id);
+            return this.context.Cuidado.Find(id);
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Service
         /// <returns>Dados do produto</returns>
         public IEnumerable<Cuidado> GetAll()
         {
-            return this.context.Cuidados.AsNoTracking();
+            return this.context.Cuidado.AsNoTracking();
         }
 
     }
