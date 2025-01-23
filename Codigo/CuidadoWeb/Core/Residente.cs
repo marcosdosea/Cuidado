@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Core;
@@ -13,7 +13,7 @@ public partial class Residente
 
     public string NomePai { get; set; } = null!;
 
-    public DateTime DataNascimento { get; set; }
+    public DateOnly DataNascimento { get; set; }
 
     public string EstadoCivil { get; set; } = null!;
 
@@ -25,9 +25,9 @@ public partial class Residente
 
     public int QuantidadeFilhos { get; set; }
 
-    public string GrauDepedencia { get; set; } = null!;
+    public sbyte GrauDepedencia { get; set; }
 
-    public string Interditado { get; set; } = null!;
+    public sbyte Interditado { get; set; }
 
     public string FonteRenda { get; set; } = null!;
 
@@ -45,25 +45,25 @@ public partial class Residente
 
     public int IdFuncionario { get; set; }
 
-    public virtual ICollection<Atividadeexterna> Atividadeexternas { get; set; } = new List<Atividadeexterna>();
+    public virtual ICollection<AtividadeExterna> AtividadeExterna { get; set; } = new List<AtividadeExterna>();
 
-    public virtual ICollection<Consultum> Consulta { get; set; } = new List<Consultum>();
+    public virtual ICollection<Consulta> Consulta { get; set; } = new List<Consulta>();
 
-    public virtual ICollection<Cuidado> Cuidados { get; set; } = new List<Cuidado>();
+    public virtual ICollection<Cuidado> Cuidado { get; set; } = new List<Cuidado>();
 
-    public virtual ICollection<Fonterendum> Fonterenda { get; set; } = new List<Fonterendum>();
+    public virtual ICollection<FonteRenda> FonteRendaNavigation { get; set; } = new List<FonteRenda>();
 
     public virtual Funcionario IdFuncionarioNavigation { get; set; } = null!;
 
     public virtual Organizacao IdOrganizacaoNavigation { get; set; } = null!;
 
-    public virtual ICollection<Planoassistencium> Planoassistencia { get; set; } = new List<Planoassistencium>();
+    public virtual ICollection<PlanoAssistencia> PlanoAssistencia { get; set; } = new List<PlanoAssistencia>();
 
-    public virtual ICollection<Planosaude> Planosaudes { get; set; } = new List<Planosaude>();
+    public virtual ICollection<PlanoSaude> PlanoSaude { get; set; } = new List<PlanoSaude>();
 
-    public virtual ICollection<Responsavel> Responsavels { get; set; } = new List<Responsavel>();
+    public virtual ICollection<Responsavel> Responsavel { get; set; } = new List<Responsavel>();
 
-    public virtual ICollection<Tipoexame> Tipoexames { get; set; } = new List<Tipoexame>();
+    public virtual ICollection<TipoExame> TipoExame { get; set; } = new List<TipoExame>();
 
-    public virtual ICollection<Visitum> Visita { get; set; } = new List<Visitum>();
+    public virtual ICollection<Visita> Visita { get; set; } = new List<Visita>();
 }

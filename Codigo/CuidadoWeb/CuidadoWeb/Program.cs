@@ -19,14 +19,15 @@ namespace CuidadoWeb
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            var connectionString = builder.Configuration.GetConnectionString("CuidadoDatabase") ?? throw new InvalidOperationException(); ;
-            builder.Services.AddDbContext<CuidadoContext>(options =>
-            {
-                options.UseMySQL(connectionString);
-            });
+            var connectionString = builder.Configuration.GetConnectionString("CuidadoDatabase")
+                ?? throw new InvalidOperationException(); ;
+            builder.Services.AddDbContext<CuidadoContext>(
+                options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
+            connectionString = builder.Configuration.GetConnectionString("IdentityDatabase")
+                ?? throw new InvalidOperationException(); ;
             builder.Services.AddDbContext<IdentityContext>(
-                options => options.UseMySQL(builder.Configuration.GetConnectionString("IdentityDatabase")));
+                options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
             builder.Services.AddDefaultIdentity<UsuarioIdentity>(
                  options =>
@@ -52,8 +53,8 @@ namespace CuidadoWeb
                      options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                      options.Lockout.MaxFailedAccessAttempts = 5;
                      options.Lockout.AllowedForNewUsers = true;
-                 }).AddRoles<IdentityRole>()
-                 .AddEntityFrameworkStores<IdentityContext>();
+                 }
+            ).AddRoles<IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
 
             builder.Services.ConfigureApplicationCookie(options =>
             {

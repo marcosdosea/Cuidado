@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Core;
@@ -15,5 +15,5 @@ public partial class Visitante
 
     public string? SegundoTelefone { get; set; }
 
-    public virtual ICollection<Visitum> Visita { get; set; } = new List<Visitum>();
+    public virtual ICollection<Visita> Visita { get; set; } = new List<Visita>();
 }

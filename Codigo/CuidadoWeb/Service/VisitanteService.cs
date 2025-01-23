@@ -31,7 +31,7 @@ namespace Service
         /// <param name="id"></param>
         public void Delete(int id)
         {
-            var visitante = this.context.Visitantes.Find(id);
+            var visitante = this.context.Visitante.Find(id);
             if (visitante != null)
             {
                 this.context.Remove(visitante);
@@ -56,12 +56,12 @@ namespace Service
         /// <returns>Dados do visitante</returns>
         public Visitante? Get(int id)
         {
-            return this.context.Visitantes.FirstOrDefault(a => a.Id == id);
+            return this.context.Visitante.FirstOrDefault(a => a.Id == id);
         }
 
         public IEnumerable<Visitante> GetAll()
         {
-            return this.context.Visitantes.AsNoTracking();
+            return this.context.Visitante.AsNoTracking();
         }
 
     }

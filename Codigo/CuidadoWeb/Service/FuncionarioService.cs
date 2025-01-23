@@ -32,7 +32,7 @@ namespace Service
         /// <param name="id"></param>
         public void Delete(int id)
         {
-            var funcionario = this.context.Funcionarios.Find(id);
+            var funcionario = this.context.Funcionario.Find(id);
             if (funcionario != null)
             {
                 this.context.Remove(funcionario);
@@ -57,17 +57,17 @@ namespace Service
         /// <returns>Dados do funcionário</returns>
         public Funcionario? Get(int id)
         {
-            return this.context.Funcionarios.FirstOrDefault(a => a.Id == id);
+            return this.context.Funcionario.FirstOrDefault(a => a.Id == id);
         }
 
         public IEnumerable<Funcionario> GetAll()
         {
-            return this.context.Funcionarios.AsNoTracking();
+            return this.context.Funcionario.AsNoTracking();
         }
 
         public async Task<FuncionarioDTO?> BuscarFuncionarioPorCpf(string cpf)
         {
-            var funcionario = await context.Funcionarios
+            var funcionario = await context.Funcionario
                 .Where(f => f.Cpf == cpf)
                 .Select(f => new FuncionarioDTO
                 {

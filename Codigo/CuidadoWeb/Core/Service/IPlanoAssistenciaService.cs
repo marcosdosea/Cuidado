@@ -2,9 +2,9 @@
 {
 	public interface IPlanoAssistenciaService
 	{
-		uint Create(Planoassistencium planoAssistencia);
-		void Edit(Planoassistencium planoAssistencia);
+		uint Create(PlanoAssistencia planoAssistencia);
+		void Edit(PlanoAssistencia planoAssistencia);
 		void Delete(int id);
-		Planoassistencium? Get(int id);
+		PlanoAssistencia? Get(int id);
 	}
 }

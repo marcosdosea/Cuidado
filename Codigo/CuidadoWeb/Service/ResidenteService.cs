@@ -31,7 +31,7 @@ namespace Service
 		/// <param name="id"></param>
 		public void Delete(int id)
 		{
-			var Residente = this.context.Residentes.Find(id);
+			var Residente = this.context.Residente.Find(id);
 			if(Residente != null)
 			{
 				this.context.Remove(Residente);
@@ -56,12 +56,12 @@ namespace Service
 		/// <returns>Dados do Residente</returns>
 		public Residente? Get(int id)
 		{
-			return this.context.Residentes.FirstOrDefault( a => a.Id == id);
+			return this.context.Residente.FirstOrDefault( a => a.Id == id);
 		}
 
 		public IEnumerable<Residente> GetAll()
 		{
-			return this.context.Residentes.AsNoTracking();
+			return this.context.Residente.AsNoTracking();
 		}
 
 	}

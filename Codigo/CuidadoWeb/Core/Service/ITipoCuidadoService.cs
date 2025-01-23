@@ -2,9 +2,9 @@
 {
 	public interface ITipoCuidadoService
 	{
-		uint Create(Tipocuidado tipoCuidado);
-		void Edit(Tipocuidado tipoCuidado);
+		uint Create(TipoCuidado tipoCuidado);
+		void Edit(TipoCuidado tipoCuidado);
 		void Delete(int id);
-		Tipocuidado? Get(int id);
+		TipoCuidado? Get(int id);
 	}
 }

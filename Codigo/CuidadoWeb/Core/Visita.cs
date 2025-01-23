@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Core;
 
-public partial class Visitum
+public partial class Visita
 {
     public int Id { get; set; }
 
-    public DateTime DataVisita { get; set; }
+    public DateOnly DataVisita { get; set; }
 
-    public TimeSpan HorarioVisita { get; set; }
+    public TimeOnly HorarioVisita { get; set; }
 
     public int IdResidente { get; set; }
 

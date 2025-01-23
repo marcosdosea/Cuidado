@@ -1,19 +1,19 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Core;
 
-public partial class Atividadeexterna
+public partial class AtividadeExterna
 {
     public int Id { get; set; }
 
-    public DateTime DataRealizacao { get; set; }
+    public DateOnly DataRealizacao { get; set; }
 
-    public TimeSpan HorarioRealizacao { get; set; }
+    public TimeOnly HorarioRealizacao { get; set; }
 
-    public DateTime DataTermino { get; set; }
+    public DateOnly DataTermino { get; set; }
 
-    public TimeSpan HorarioTermino { get; set; }
+    public TimeOnly HorarioTermino { get; set; }
 
     public string TipoAtividade { get; set; } = null!;
 
@@ -21,7 +21,7 @@ public partial class Atividadeexterna
 
     public int IdResidente { get; set; }
 
-    public virtual ICollection<Acompanhante> Acompanhantes { get; set; } = new List<Acompanhante>();
+    public virtual ICollection<Acompanhante> Acompanhante { get; set; } = new List<Acompanhante>();
 
     public virtual Organizacao IdOrganizacaoNavigation { get; set; } = null!;
 

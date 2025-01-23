@@ -2,9 +2,9 @@
 {
 	public interface IAtividadeExternaService
 	{
-		uint Create(Atividadeexterna atividadeExterna);
-		void Edit(Atividadeexterna atividadeExterna);
+		uint Create(AtividadeExterna atividadeExterna);
+		void Edit(AtividadeExterna atividadeExterna);
 		void Delete(int id);
-		Atividadeexterna? Get(int id);
+		AtividadeExterna? Get(int id);
 	}
 }

@@ -2,9 +2,9 @@
 {
 	public interface IFornecedorOrganizacaoService
 	{
-		uint Create(Fornecedororganizacao fornecedorOrganizacao);
-		void Edit(Fornecedororganizacao fornecedorOrganizacao);
+		uint Create(FornecedorOrganizacao fornecedorOrganizacao);
+		void Edit(FornecedorOrganizacao fornecedorOrganizacao);
 		void Delete(int id);
-		Fornecedororganizacao? Get(int id);
+		FornecedorOrganizacao? Get(int id);
 	}
 }

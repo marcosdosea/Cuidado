@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Core;
 
-public partial class Planoassistencium
+public partial class PlanoAssistencia
 {
     public int Id { get; set; }
 
@@ -17,7 +17,7 @@ public partial class Planoassistencium
 
     public string? SegundoTelefone { get; set; }
 
-    public int ResidenteId { get; set; }
+    public int IdResidente { get; set; }
 
-    public virtual Residente Residente { get; set; } = null!;
+    public virtual Residente IdResidenteNavigation { get; set; } = null!;
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Core;
@@ -11,12 +11,16 @@ public partial class Funcionario
 
     public string Cpf { get; set; } = null!;
 
-    public DateTime DataNascimento { get; set; }
+    public DateOnly DataNascimento { get; set; }
 
-    public DateTime DataAdmissao { get; set; }
+    public DateOnly DataAdmissao { get; set; }
 
     public string Cargo { get; set; } = null!;
 
+    /// <summary>
+    /// A -&gt; Ativo
+    /// I -&gt; Inativo
+    /// </summary>
     public string Status { get; set; } = null!;
 
     public decimal Salario { get; set; }
@@ -43,13 +47,13 @@ public partial class Funcionario
 
     public int IdOrganizacao { get; set; }
 
-    public virtual ICollection<Aquisicao> Aquisicaos { get; set; } = new List<Aquisicao>();
+    public virtual ICollection<Aquisicao> Aquisicao { get; set; } = new List<Aquisicao>();
 
-    public virtual ICollection<Consultum> Consulta { get; set; } = new List<Consultum>();
+    public virtual ICollection<Consulta> Consulta { get; set; } = new List<Consulta>();
 
-    public virtual ICollection<Cuidado> Cuidados { get; set; } = new List<Cuidado>();
+    public virtual ICollection<Cuidado> Cuidado { get; set; } = new List<Cuidado>();
 
     public virtual Organizacao IdOrganizacaoNavigation { get; set; } = null!;
 
-    public virtual ICollection<Residente> Residentes { get; set; } = new List<Residente>();
+    public virtual ICollection<Residente> Residente { get; set; } = new List<Residente>();
 }

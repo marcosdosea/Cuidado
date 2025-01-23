@@ -2,9 +2,9 @@
 {
 	public interface IFonteRendaService
 	{
-		uint Create(Fonterendum fonteRenda);
-		void Edit(Fonterendum fonteRenda);
+		uint Create(FonteRenda fonteRenda);
+		void Edit(FonteRenda fonteRenda);
 		void Delete(int id);
-		Fonterendum? Get(int id);
+		FonteRenda? Get(int id);
 	}
 }

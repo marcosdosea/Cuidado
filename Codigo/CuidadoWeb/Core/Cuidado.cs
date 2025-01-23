@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Core;
@@ -17,7 +17,7 @@ public partial class Cuidado
 
     public virtual Funcionario IdFuncionarioNavigation { get; set; } = null!;
 
-    public virtual Planejamentocuidado IdPlanejamentoCuidadoNavigation { get; set; } = null!;
+    public virtual PlanejamentoCuidado IdPlanejamentoCuidadoNavigation { get; set; } = null!;
 
     public virtual Residente IdResidenteNavigation { get; set; } = null!;
 }
