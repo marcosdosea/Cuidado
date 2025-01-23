@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Core;
@@ -13,9 +13,9 @@ public partial class Produto
 
     public int IdOrganizacao { get; set; }
 
-    public virtual ICollection<Aquisicaoproduto> Aquisicaoprodutos { get; set; } = new List<Aquisicaoproduto>();
+    public virtual ICollection<AquisicaoProduto> AquisicaoProduto { get; set; } = new List<AquisicaoProduto>();
 
     public virtual Organizacao IdOrganizacaoNavigation { get; set; } = null!;
 
-    public virtual ICollection<Planejamentocuidado> Planejamentocuidados { get; set; } = new List<Planejamentocuidado>();
+    public virtual ICollection<PlanejamentoCuidado> PlanejamentoCuidado { get; set; } = new List<PlanejamentoCuidado>();
 }

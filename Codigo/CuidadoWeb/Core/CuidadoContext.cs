@@ -1,13 +1,23 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
 
 namespace Core;
 
 public partial class CuidadoContext : DbContext
 {
+    private readonly IConfiguration? _configuration;
+
     public CuidadoContext()
     {
+    }
+
+    public CuidadoContext(DbContextOptions<CuidadoContext> options, IConfiguration configuration)
+        : base(options)
+    {
+        _configuration = configuration;
     }
 
     public CuidadoContext(DbContextOptions<CuidadoContext> options)
@@ -15,74 +25,88 @@ public partial class CuidadoContext : DbContext
     {
     }
 
-    public virtual DbSet<Acompanhante> Acompanhantes { get; set; }
+    public virtual DbSet<Acompanhante> Acompanhante { get; set; }
 
-    public virtual DbSet<Aquisicao> Aquisicaos { get; set; }
+    public virtual DbSet<Aquisicao> Aquisicao { get; set; }
 
-    public virtual DbSet<Aquisicaoproduto> Aquisicaoprodutos { get; set; }
+    public virtual DbSet<AquisicaoProduto> AquisicaoProduto { get; set; }
 
-    public virtual DbSet<Atividadeexterna> Atividadeexternas { get; set; }
+    public virtual DbSet<AtividadeExterna> AtividadeExterna { get; set; }
 
-    public virtual DbSet<Consultum> Consulta { get; set; }
+    public virtual DbSet<Consulta> Consulta { get; set; }
 
-    public virtual DbSet<Cuidado> Cuidados { get; set; }
+    public virtual DbSet<Cuidado> Cuidado { get; set; }
 
-    public virtual DbSet<Especialidademedicina> Especialidademedicinas { get; set; }
+    public virtual DbSet<EspecialidadeMedicina> EspecialidadeMedicina { get; set; }
 
-    public virtual DbSet<Exame> Exames { get; set; }
+    public virtual DbSet<Exame> Exame { get; set; }
 
-    public virtual DbSet<Fonterendum> Fonterenda { get; set; }
+    public virtual DbSet<FonteRenda> FonteRenda { get; set; }
 
-    public virtual DbSet<Fornecedor> Fornecedors { get; set; }
+    public virtual DbSet<Fornecedor> Fornecedor { get; set; }
 
-    public virtual DbSet<Fornecedororganizacao> Fornecedororganizacaos { get; set; }
+    public virtual DbSet<FornecedorOrganizacao> FornecedorOrganizacao { get; set; }
 
-    public virtual DbSet<Funcionario> Funcionarios { get; set; }
+    public virtual DbSet<Funcionario> Funcionario { get; set; }
 
-    public virtual DbSet<Organizacao> Organizacaos { get; set; }
+    public virtual DbSet<Organizacao> Organizacao { get; set; }
 
-    public virtual DbSet<Planejamentocuidado> Planejamentocuidados { get; set; }
+    public virtual DbSet<PlanejamentoCuidado> PlanejamentoCuidado { get; set; }
 
-    public virtual DbSet<Planejamentocuidadodiario> Planejamentocuidadodiarios { get; set; }
+    public virtual DbSet<PlanejamentoCuidadoDiario> PlanejamentoCuidadoDiario { get; set; }
 
-    public virtual DbSet<Planoassistencium> Planoassistencia { get; set; }
+    public virtual DbSet<PlanoAssistencia> PlanoAssistencia { get; set; }
 
-    public virtual DbSet<Planosaude> Planosaudes { get; set; }
+    public virtual DbSet<PlanoSaude> PlanoSaude { get; set; }
 
-    public virtual DbSet<Produto> Produtos { get; set; }
+    public virtual DbSet<Produto> Produto { get; set; }
 
-    public virtual DbSet<Residente> Residentes { get; set; }
+    public virtual DbSet<Residente> Residente { get; set; }
 
-    public virtual DbSet<Responsavel> Responsavels { get; set; }
+    public virtual DbSet<Responsavel> Responsavel { get; set; }
 
-    public virtual DbSet<Tipocuidado> Tipocuidados { get; set; }
+    public virtual DbSet<TipoCuidado> TipoCuidado { get; set; }
 
-    public virtual DbSet<Tipoexame> Tipoexames { get; set; }
+    public virtual DbSet<TipoExame> TipoExame { get; set; }
 
-    public virtual DbSet<Visitante> Visitantes { get; set; }
+    public virtual DbSet<Visita> Visita { get; set; }
 
-    public virtual DbSet<Visitum> Visita { get; set; }
+    public virtual DbSet<Visitante> Visitante { get; set; }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (_configuration == null)
+            throw new InvalidOperationException();
+
+        var connectionString = _configuration.GetConnectionString("CuidadoDatabase");
+        optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder
+            .UseCollation("utf8mb3_general_ci")
+            .HasCharSet("utf8mb3");
+
         modelBuilder.Entity<Acompanhante>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("acompanhante");
-
             entity.HasIndex(e => e.IdAtividadeExterna, "fk_acompanhantes_atividadeExterna1_idx");
 
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.IdAtividadeExterna).HasColumnName("idAtividadeExterna");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.IdAtividadeExterna)
+                .HasColumnType("int(11)")
+                .HasColumnName("idAtividadeExterna");
             entity.Property(e => e.Nome)
                 .HasMaxLength(50)
                 .HasColumnName("nome");
 
-            entity.HasOne(d => d.IdAtividadeExternaNavigation).WithMany(p => p.Acompanhantes)
+            entity.HasOne(d => d.IdAtividadeExternaNavigation).WithMany(p => p.Acompanhante)
                 .HasForeignKey(d => d.IdAtividadeExterna)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_acompanhantes_atividadeExterna1");
         });
 
@@ -90,120 +114,130 @@ public partial class CuidadoContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("aquisicao");
-
             entity.HasIndex(e => e.IdFornecedor, "fk_aquisicao_fornecedor1_idx");
 
             entity.HasIndex(e => e.IdFuncionario, "fk_aquisicao_funcionario1_idx");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
             entity.Property(e => e.DataEntrada)
                 .HasColumnType("datetime")
                 .HasColumnName("dataEntrada");
             entity.Property(e => e.DataSolicitacao)
                 .HasColumnType("datetime")
                 .HasColumnName("dataSolicitacao");
-            entity.Property(e => e.IdFornecedor).HasColumnName("idFornecedor");
-            entity.Property(e => e.IdFuncionario).HasColumnName("idFuncionario");
+            entity.Property(e => e.IdFornecedor)
+                .HasColumnType("int(11)")
+                .HasColumnName("idFornecedor");
+            entity.Property(e => e.IdFuncionario)
+                .HasColumnType("int(11)")
+                .HasColumnName("idFuncionario");
             entity.Property(e => e.Observacoes)
                 .HasMaxLength(200)
                 .HasColumnName("observacoes");
 
-            entity.HasOne(d => d.IdFornecedorNavigation).WithMany(p => p.Aquisicaos)
+            entity.HasOne(d => d.IdFornecedorNavigation).WithMany(p => p.Aquisicao)
                 .HasForeignKey(d => d.IdFornecedor)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_aquisicao_fornecedor1");
 
-            entity.HasOne(d => d.IdFuncionarioNavigation).WithMany(p => p.Aquisicaos)
+            entity.HasOne(d => d.IdFuncionarioNavigation).WithMany(p => p.Aquisicao)
                 .HasForeignKey(d => d.IdFuncionario)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_aquisicao_funcionario1");
         });
 
-        modelBuilder.Entity<Aquisicaoproduto>(entity =>
+        modelBuilder.Entity<AquisicaoProduto>(entity =>
         {
-            entity.HasKey(e => new { e.IdAquisicao, e.IdProduto }).HasName("PRIMARY");
-
-            entity.ToTable("aquisicaoproduto");
+            entity.HasKey(e => new { e.IdAquisicao, e.IdProduto })
+                .HasName("PRIMARY")
+                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
             entity.HasIndex(e => e.IdAquisicao, "fk_aquisicao_has_produto_aquisicao1_idx");
 
             entity.HasIndex(e => e.IdProduto, "fk_aquisicao_has_produto_produto1_idx");
 
-            entity.Property(e => e.IdAquisicao).HasColumnName("idAquisicao");
-            entity.Property(e => e.IdProduto).HasColumnName("idProduto");
+            entity.Property(e => e.IdAquisicao)
+                .HasColumnType("int(11)")
+                .HasColumnName("idAquisicao");
+            entity.Property(e => e.IdProduto)
+                .HasColumnType("int(11)")
+                .HasColumnName("idProduto");
             entity.Property(e => e.DataValidade)
                 .HasColumnType("datetime")
                 .HasColumnName("dataValidade");
             entity.Property(e => e.Lote)
                 .HasMaxLength(50)
                 .HasColumnName("lote");
-            entity.Property(e => e.Quantidade).HasColumnName("quantidade");
+            entity.Property(e => e.Quantidade)
+                .HasColumnType("int(11)")
+                .HasColumnName("quantidade");
 
-            entity.HasOne(d => d.IdAquisicaoNavigation).WithMany(p => p.Aquisicaoprodutos)
+            entity.HasOne(d => d.IdAquisicaoNavigation).WithMany(p => p.AquisicaoProduto)
                 .HasForeignKey(d => d.IdAquisicao)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_aquisicao_has_produto_aquisicao1");
 
-            entity.HasOne(d => d.IdProdutoNavigation).WithMany(p => p.Aquisicaoprodutos)
+            entity.HasOne(d => d.IdProdutoNavigation).WithMany(p => p.AquisicaoProduto)
                 .HasForeignKey(d => d.IdProduto)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_aquisicao_has_produto_produto1");
         });
 
-        modelBuilder.Entity<Atividadeexterna>(entity =>
+        modelBuilder.Entity<AtividadeExterna>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity.ToTable("atividadeexterna");
 
             entity.HasIndex(e => e.IdOrganizacao, "fk_atividadeExterna_organizacao1_idx");
 
             entity.HasIndex(e => e.IdResidente, "fk_atividadeExterna_residente1_idx");
 
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.DataRealizacao)
-                .HasColumnType("date")
-                .HasColumnName("dataRealizacao");
-            entity.Property(e => e.DataTermino)
-                .HasColumnType("date")
-                .HasColumnName("dataTermino");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.DataRealizacao).HasColumnName("dataRealizacao");
+            entity.Property(e => e.DataTermino).HasColumnName("dataTermino");
             entity.Property(e => e.HorarioRealizacao)
                 .HasColumnType("time")
                 .HasColumnName("horarioRealizacao");
             entity.Property(e => e.HorarioTermino)
                 .HasColumnType("time")
                 .HasColumnName("horarioTermino");
-            entity.Property(e => e.IdOrganizacao).HasColumnName("idOrganizacao");
-            entity.Property(e => e.IdResidente).HasColumnName("idResidente");
+            entity.Property(e => e.IdOrganizacao)
+                .HasColumnType("int(11)")
+                .HasColumnName("idOrganizacao");
+            entity.Property(e => e.IdResidente)
+                .HasColumnType("int(11)")
+                .HasColumnName("idResidente");
             entity.Property(e => e.TipoAtividade)
                 .HasMaxLength(30)
                 .HasColumnName("tipoAtividade");
 
-            entity.HasOne(d => d.IdOrganizacaoNavigation).WithMany(p => p.Atividadeexternas)
+            entity.HasOne(d => d.IdOrganizacaoNavigation).WithMany(p => p.AtividadeExterna)
                 .HasForeignKey(d => d.IdOrganizacao)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_atividadeExterna_organizacao1");
 
-            entity.HasOne(d => d.IdResidenteNavigation).WithMany(p => p.Atividadeexternas)
+            entity.HasOne(d => d.IdResidenteNavigation).WithMany(p => p.AtividadeExterna)
                 .HasForeignKey(d => d.IdResidente)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_atividadeExterna_residente1");
         });
 
-        modelBuilder.Entity<Consultum>(entity =>
+        modelBuilder.Entity<Consulta>(entity =>
         {
-            entity.HasKey(e => e.Idconsulta).HasName("PRIMARY");
-
-            entity.ToTable("consulta");
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
 
             entity.HasIndex(e => e.IdEspecialidadeMedicina, "fk_consulta_especialidadeMedicina1_idx");
 
-            entity.HasIndex(e => e.FuncionarioId, "fk_consulta_funcionario1_idx");
+            entity.HasIndex(e => e.IdFuncionario, "fk_consulta_funcionario1_idx");
 
-            entity.HasIndex(e => e.ResidenteId, "fk_consulta_residente1_idx");
+            entity.HasIndex(e => e.IdResidente, "fk_consulta_residente1_idx");
 
-            entity.Property(e => e.Idconsulta).HasColumnName("idconsulta");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
             entity.Property(e => e.DataConsulta)
                 .HasColumnType("datetime")
                 .HasColumnName("dataConsulta");
@@ -214,26 +248,32 @@ public partial class CuidadoContext : DbContext
                 .HasMaxLength(200)
                 .HasColumnName("descricao");
             entity.Property(e => e.ExamesSolicitados).HasColumnName("examesSolicitados");
-            entity.Property(e => e.FuncionarioId).HasColumnName("funcionario_id");
-            entity.Property(e => e.IdEspecialidadeMedicina).HasColumnName("idEspecialidadeMedicina");
+            entity.Property(e => e.IdEspecialidadeMedicina)
+                .HasColumnType("int(11)")
+                .HasColumnName("idEspecialidadeMedicina");
+            entity.Property(e => e.IdFuncionario)
+                .HasColumnType("int(11)")
+                .HasColumnName("idFuncionario");
+            entity.Property(e => e.IdResidente)
+                .HasColumnType("int(11)")
+                .HasColumnName("idResidente");
             entity.Property(e => e.MedicoResponsavel)
                 .HasMaxLength(50)
                 .HasColumnName("medicoResponsavel");
-            entity.Property(e => e.ResidenteId).HasColumnName("residente_id");
-
-            entity.HasOne(d => d.Funcionario).WithMany(p => p.Consulta)
-                .HasForeignKey(d => d.FuncionarioId)
-                .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("fk_consulta_funcionario1");
 
             entity.HasOne(d => d.IdEspecialidadeMedicinaNavigation).WithMany(p => p.Consulta)
                 .HasForeignKey(d => d.IdEspecialidadeMedicina)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_consulta_especialidadeMedicina1");
 
-            entity.HasOne(d => d.Residente).WithMany(p => p.Consulta)
-                .HasForeignKey(d => d.ResidenteId)
-                .OnDelete(DeleteBehavior.Restrict)
+            entity.HasOne(d => d.IdFuncionarioNavigation).WithMany(p => p.Consulta)
+                .HasForeignKey(d => d.IdFuncionario)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_consulta_funcionario1");
+
+            entity.HasOne(d => d.IdResidenteNavigation).WithMany(p => p.Consulta)
+                .HasForeignKey(d => d.IdResidente)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_consulta_residente1");
         });
 
@@ -241,94 +281,106 @@ public partial class CuidadoContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("cuidado");
-
             entity.HasIndex(e => e.IdFuncionario, "fk_cuidado_funcionario1_idx");
 
             entity.HasIndex(e => e.IdPlanejamentoCuidado, "fk_cuidado_planejamentoCuidado1_idx");
 
             entity.HasIndex(e => e.IdResidente, "fk_cuidado_residente1_idx");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
             entity.Property(e => e.DataExecucao)
                 .HasColumnType("datetime")
                 .HasColumnName("dataExecucao");
-            entity.Property(e => e.IdFuncionario).HasColumnName("idFuncionario");
-            entity.Property(e => e.IdPlanejamentoCuidado).HasColumnName("idPlanejamentoCuidado");
-            entity.Property(e => e.IdResidente).HasColumnName("idResidente");
+            entity.Property(e => e.IdFuncionario)
+                .HasColumnType("int(11)")
+                .HasColumnName("idFuncionario");
+            entity.Property(e => e.IdPlanejamentoCuidado)
+                .HasColumnType("int(11)")
+                .HasColumnName("idPlanejamentoCuidado");
+            entity.Property(e => e.IdResidente)
+                .HasColumnType("int(11)")
+                .HasColumnName("idResidente");
 
-            entity.HasOne(d => d.IdFuncionarioNavigation).WithMany(p => p.Cuidados)
+            entity.HasOne(d => d.IdFuncionarioNavigation).WithMany(p => p.Cuidado)
                 .HasForeignKey(d => d.IdFuncionario)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_cuidado_funcionario1");
 
-            entity.HasOne(d => d.IdPlanejamentoCuidadoNavigation).WithMany(p => p.Cuidados)
+            entity.HasOne(d => d.IdPlanejamentoCuidadoNavigation).WithMany(p => p.Cuidado)
                 .HasForeignKey(d => d.IdPlanejamentoCuidado)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_cuidado_planejamentoCuidado1");
 
-            entity.HasOne(d => d.IdResidenteNavigation).WithMany(p => p.Cuidados)
+            entity.HasOne(d => d.IdResidenteNavigation).WithMany(p => p.Cuidado)
                 .HasForeignKey(d => d.IdResidente)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_cuidado_residente1");
         });
 
-        modelBuilder.Entity<Especialidademedicina>(entity =>
+        modelBuilder.Entity<EspecialidadeMedicina>(entity =>
         {
-            entity.HasKey(e => e.IdespecialidadeMedicina).HasName("PRIMARY");
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("especialidademedicina");
-
-            entity.Property(e => e.IdespecialidadeMedicina).HasColumnName("idespecialidadeMedicina");
-            entity.Property(e => e.NomeEspecialidade)
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.Nome)
                 .HasMaxLength(50)
-                .HasColumnName("nomeEspecialidade");
+                .HasColumnName("nome");
         });
 
         modelBuilder.Entity<Exame>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("exame");
-
             entity.HasIndex(e => e.IdConsulta, "fk_exame_consulta1_idx");
 
             entity.HasIndex(e => e.IdTipoExame, "fk_exame_tipoExame1_idx");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
             entity.Property(e => e.DataRealizacao)
                 .HasColumnType("datetime")
                 .HasColumnName("dataRealizacao");
             entity.Property(e => e.DataResultado)
                 .HasColumnType("datetime")
                 .HasColumnName("dataResultado");
-            entity.Property(e => e.IdConsulta).HasColumnName("idConsulta");
-            entity.Property(e => e.IdTipoExame).HasColumnName("idTipoExame");
+            entity.Property(e => e.IdConsulta)
+                .HasColumnType("int(11)")
+                .HasColumnName("idConsulta");
+            entity.Property(e => e.IdTipoExame)
+                .HasColumnType("int(11)")
+                .HasColumnName("idTipoExame");
             entity.Property(e => e.Resultado)
                 .HasMaxLength(100)
                 .HasColumnName("resultado");
 
-            entity.HasOne(d => d.IdConsultaNavigation).WithMany(p => p.Exames)
+            entity.HasOne(d => d.IdConsultaNavigation).WithMany(p => p.Exame)
                 .HasForeignKey(d => d.IdConsulta)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_exame_consulta1");
 
-            entity.HasOne(d => d.IdTipoExameNavigation).WithMany(p => p.Exames)
+            entity.HasOne(d => d.IdTipoExameNavigation).WithMany(p => p.Exame)
                 .HasForeignKey(d => d.IdTipoExame)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_exame_tipoExame1");
         });
 
-        modelBuilder.Entity<Fonterendum>(entity =>
+        modelBuilder.Entity<FonteRenda>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("fonterenda");
-
             entity.HasIndex(e => e.IdResidente, "fk_fonteRenda_residente1_idx");
 
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.IdResidente).HasColumnName("idResidente");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.IdResidente)
+                .HasColumnType("int(11)")
+                .HasColumnName("idResidente");
             entity.Property(e => e.Nome)
                 .HasMaxLength(30)
                 .HasColumnName("nome");
@@ -336,9 +388,9 @@ public partial class CuidadoContext : DbContext
                 .HasPrecision(10)
                 .HasColumnName("valor");
 
-            entity.HasOne(d => d.IdResidenteNavigation).WithMany(p => p.Fonterenda)
+            entity.HasOne(d => d.IdResidenteNavigation).WithMany(p => p.FonteRendaNavigation)
                 .HasForeignKey(d => d.IdResidente)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_fonteRenda_residente1");
         });
 
@@ -346,9 +398,9 @@ public partial class CuidadoContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("fornecedor");
-
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
             entity.Property(e => e.Cnpj)
                 .HasMaxLength(14)
                 .HasColumnName("cnpj");
@@ -363,30 +415,34 @@ public partial class CuidadoContext : DbContext
                 .HasColumnName("segundoTelefone");
         });
 
-        modelBuilder.Entity<Fornecedororganizacao>(entity =>
+        modelBuilder.Entity<FornecedorOrganizacao>(entity =>
         {
-            entity.HasKey(e => new { e.IdFornecedor, e.IdOrganizacao }).HasName("PRIMARY");
-
-            entity.ToTable("fornecedororganizacao");
+            entity.HasKey(e => new { e.IdFornecedor, e.IdOrganizacao })
+                .HasName("PRIMARY")
+                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
             entity.HasIndex(e => e.IdFornecedor, "fk_fornecedor_has_organizacao_fornecedor1_idx");
 
             entity.HasIndex(e => e.IdOrganizacao, "fk_fornecedor_has_organizacao_organizacao1_idx");
 
-            entity.Property(e => e.IdFornecedor).HasColumnName("idFornecedor");
-            entity.Property(e => e.IdOrganizacao).HasColumnName("idOrganizacao");
+            entity.Property(e => e.IdFornecedor)
+                .HasColumnType("int(11)")
+                .HasColumnName("idFornecedor");
+            entity.Property(e => e.IdOrganizacao)
+                .HasColumnType("int(11)")
+                .HasColumnName("idOrganizacao");
             entity.Property(e => e.Observacoes)
                 .HasMaxLength(200)
                 .HasColumnName("observacoes");
 
-            entity.HasOne(d => d.IdFornecedorNavigation).WithMany(p => p.Fornecedororganizacaos)
+            entity.HasOne(d => d.IdFornecedorNavigation).WithMany(p => p.FornecedorOrganizacao)
                 .HasForeignKey(d => d.IdFornecedor)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_fornecedor_has_organizacao_fornecedor1");
 
-            entity.HasOne(d => d.IdOrganizacaoNavigation).WithMany(p => p.Fornecedororganizacaos)
+            entity.HasOne(d => d.IdOrganizacaoNavigation).WithMany(p => p.FornecedorOrganizacao)
                 .HasForeignKey(d => d.IdOrganizacao)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_fornecedor_has_organizacao_organizacao1");
         });
 
@@ -394,18 +450,20 @@ public partial class CuidadoContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("funcionario");
-
             entity.HasIndex(e => e.IdOrganizacao, "fk_funcionario_organizacao1_idx");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
             entity.Property(e => e.Bairro)
                 .HasMaxLength(50)
                 .HasColumnName("bairro");
             entity.Property(e => e.Cargo)
                 .HasMaxLength(15)
                 .HasColumnName("cargo");
-            entity.Property(e => e.Cep).HasColumnName("cep");
+            entity.Property(e => e.Cep)
+                .HasColumnType("int(11)")
+                .HasColumnName("cep");
             entity.Property(e => e.Cidade)
                 .HasMaxLength(30)
                 .HasColumnName("cidade");
@@ -413,25 +471,25 @@ public partial class CuidadoContext : DbContext
                 .HasMaxLength(100)
                 .HasColumnName("complemento");
             entity.Property(e => e.Cpf)
-                .HasMaxLength(45)
+                .HasMaxLength(11)
                 .HasColumnName("cpf");
-            entity.Property(e => e.DataAdmissao)
-                .HasColumnType("date")
-                .HasColumnName("dataAdmissao");
-            entity.Property(e => e.DataNascimento)
-                .HasColumnType("date")
-                .HasColumnName("dataNascimento");
+            entity.Property(e => e.DataAdmissao).HasColumnName("dataAdmissao");
+            entity.Property(e => e.DataNascimento).HasColumnName("dataNascimento");
             entity.Property(e => e.Estado)
                 .HasMaxLength(2)
                 .HasColumnName("estado");
-            entity.Property(e => e.IdOrganizacao).HasColumnName("idOrganizacao");
+            entity.Property(e => e.IdOrganizacao)
+                .HasColumnType("int(11)")
+                .HasColumnName("idOrganizacao");
             entity.Property(e => e.IdentificadorCasa)
                 .HasMaxLength(10)
                 .HasColumnName("identificadorCasa");
             entity.Property(e => e.Nome)
                 .HasMaxLength(50)
                 .HasColumnName("nome");
-            entity.Property(e => e.NumeroCasa).HasColumnName("numeroCasa");
+            entity.Property(e => e.NumeroCasa)
+                .HasColumnType("int(11)")
+                .HasColumnName("numeroCasa");
             entity.Property(e => e.PrimeiroTelefone)
                 .HasMaxLength(13)
                 .HasColumnName("primeiroTelefone");
@@ -445,22 +503,23 @@ public partial class CuidadoContext : DbContext
                 .HasMaxLength(13)
                 .HasColumnName("segundoTelefone");
             entity.Property(e => e.Status)
-                .HasColumnType("enum('0','1')")
+                .HasComment("A -> Ativo\nI -> Inativo")
+                .HasColumnType("enum('A','I')")
                 .HasColumnName("status");
 
-            entity.HasOne(d => d.IdOrganizacaoNavigation).WithMany(p => p.Funcionarios)
+            entity.HasOne(d => d.IdOrganizacaoNavigation).WithMany(p => p.Funcionario)
                 .HasForeignKey(d => d.IdOrganizacao)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_funcionario_organizacao1");
         });
 
         modelBuilder.Entity<Organizacao>(entity =>
         {
-            entity.HasKey(e => e.Idorganizacao).HasName("PRIMARY");
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("organizacao");
-
-            entity.Property(e => e.Idorganizacao).HasColumnName("idorganizacao");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
             entity.Property(e => e.Cnpj)
                 .HasMaxLength(14)
                 .HasColumnName("cnpj");
@@ -469,17 +528,17 @@ public partial class CuidadoContext : DbContext
                 .HasColumnName("nome");
         });
 
-        modelBuilder.Entity<Planejamentocuidado>(entity =>
+        modelBuilder.Entity<PlanejamentoCuidado>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity.ToTable("planejamentocuidado");
 
             entity.HasIndex(e => e.IdProduto, "fk_planejamentoCuidado_produto1_idx");
 
             entity.HasIndex(e => e.IdTipoCuidaddo, "fk_planejamentoCuidado_tipoCuidado1_idx");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
             entity.Property(e => e.Continuo).HasColumnName("continuo");
             entity.Property(e => e.DataFim)
                 .HasColumnType("datetime")
@@ -493,86 +552,102 @@ public partial class CuidadoContext : DbContext
             entity.Property(e => e.FrequenciaDiaria)
                 .HasMaxLength(50)
                 .HasColumnName("frequenciaDiaria");
-            entity.Property(e => e.IdProduto).HasColumnName("idProduto");
-            entity.Property(e => e.IdTipoCuidaddo).HasColumnName("idTipoCuidaddo");
+            entity.Property(e => e.IdProduto)
+                .HasColumnType("int(11)")
+                .HasColumnName("idProduto");
+            entity.Property(e => e.IdTipoCuidaddo)
+                .HasColumnType("int(11)")
+                .HasColumnName("idTipoCuidaddo");
 
-            entity.HasOne(d => d.IdProdutoNavigation).WithMany(p => p.Planejamentocuidados)
+            entity.HasOne(d => d.IdProdutoNavigation).WithMany(p => p.PlanejamentoCuidado)
                 .HasForeignKey(d => d.IdProduto)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_planejamentoCuidado_produto1");
 
-            entity.HasOne(d => d.IdTipoCuidaddoNavigation).WithMany(p => p.Planejamentocuidados)
+            entity.HasOne(d => d.IdTipoCuidaddoNavigation).WithMany(p => p.PlanejamentoCuidado)
                 .HasForeignKey(d => d.IdTipoCuidaddo)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_planejamentoCuidado_tipoCuidado1");
         });
 
-        modelBuilder.Entity<Planejamentocuidadodiario>(entity =>
+        modelBuilder.Entity<PlanejamentoCuidadoDiario>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity.ToTable("planejamentocuidadodiario");
 
             entity.HasIndex(e => e.IdPlanejamentoCuidado, "fk_planejamentoCuidadoDiario_planejamentoCuidado1_idx");
 
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.DiaSemana)
-                .HasColumnType("date")
-                .HasColumnName("diaSemana");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.DiaSemana).HasColumnName("diaSemana");
             entity.Property(e => e.Hora)
                 .HasColumnType("time")
                 .HasColumnName("hora");
-            entity.Property(e => e.IdPlanejamentoCuidado).HasColumnName("idPlanejamentoCuidado");
+            entity.Property(e => e.IdPlanejamentoCuidado)
+                .HasColumnType("int(11)")
+                .HasColumnName("idPlanejamentoCuidado");
 
-            entity.HasOne(d => d.IdPlanejamentoCuidadoNavigation).WithMany(p => p.Planejamentocuidadodiarios)
+            entity.HasOne(d => d.IdPlanejamentoCuidadoNavigation).WithMany(p => p.PlanejamentoCuidadoDiario)
                 .HasForeignKey(d => d.IdPlanejamentoCuidado)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_planejamentoCuidadoDiario_planejamentoCuidado1");
         });
 
-        modelBuilder.Entity<Planoassistencium>(entity =>
+        modelBuilder.Entity<PlanoAssistencia>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("planoassistencia");
+            entity.HasIndex(e => e.IdResidente, "fk_planoAssistencia_residente1_idx");
 
-            entity.HasIndex(e => e.ResidenteId, "fk_planoAssistencia_residente1_idx");
-
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.IdResidente)
+                .HasColumnType("int(11)")
+                .HasColumnName("idResidente");
             entity.Property(e => e.Nome)
                 .HasMaxLength(50)
                 .HasColumnName("nome");
-            entity.Property(e => e.Numero).HasColumnName("numero");
-            entity.Property(e => e.NumeroSerie).HasColumnName("numeroSerie");
+            entity.Property(e => e.Numero)
+                .HasColumnType("int(11)")
+                .HasColumnName("numero");
+            entity.Property(e => e.NumeroSerie)
+                .HasColumnType("int(11)")
+                .HasColumnName("numeroSerie");
             entity.Property(e => e.PrimeiroTelefone)
                 .HasMaxLength(13)
                 .HasColumnName("primeiroTelefone");
-            entity.Property(e => e.ResidenteId).HasColumnName("residente_id");
             entity.Property(e => e.SegundoTelefone)
                 .HasMaxLength(13)
                 .HasColumnName("segundoTelefone");
 
-            entity.HasOne(d => d.Residente).WithMany(p => p.Planoassistencia)
-                .HasForeignKey(d => d.ResidenteId)
-                .OnDelete(DeleteBehavior.Restrict)
+            entity.HasOne(d => d.IdResidenteNavigation).WithMany(p => p.PlanoAssistencia)
+                .HasForeignKey(d => d.IdResidente)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_planoAssistencia_residente1");
         });
 
-        modelBuilder.Entity<Planosaude>(entity =>
+        modelBuilder.Entity<PlanoSaude>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("planosaude");
-
             entity.HasIndex(e => e.IdResidente, "fk_planoSaude_residente1_idx");
 
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.IdResidente).HasColumnName("idResidente");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.IdResidente)
+                .HasColumnType("int(11)")
+                .HasColumnName("idResidente");
             entity.Property(e => e.Nome)
                 .HasMaxLength(50)
                 .HasColumnName("nome");
-            entity.Property(e => e.Numero).HasColumnName("numero");
-            entity.Property(e => e.NumeroSerie).HasColumnName("numeroSerie");
+            entity.Property(e => e.Numero)
+                .HasColumnType("int(11)")
+                .HasColumnName("numero");
+            entity.Property(e => e.NumeroSerie)
+                .HasColumnType("int(11)")
+                .HasColumnName("numeroSerie");
             entity.Property(e => e.PrimeiroTelefone)
                 .HasMaxLength(13)
                 .HasColumnName("primeiroTelefone");
@@ -580,7 +655,7 @@ public partial class CuidadoContext : DbContext
                 .HasMaxLength(13)
                 .HasColumnName("segundoTelefone");
 
-            entity.HasOne(d => d.IdResidenteNavigation).WithMany(p => p.Planosaudes)
+            entity.HasOne(d => d.IdResidenteNavigation).WithMany(p => p.PlanoSaude)
                 .HasForeignKey(d => d.IdResidente)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_planoSaude_residente1");
@@ -590,22 +665,24 @@ public partial class CuidadoContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("produto");
-
             entity.HasIndex(e => e.IdOrganizacao, "fk_produto_organizacao1_idx");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
             entity.Property(e => e.Classificacao)
                 .HasMaxLength(30)
                 .HasColumnName("classificacao");
-            entity.Property(e => e.IdOrganizacao).HasColumnName("idOrganizacao");
+            entity.Property(e => e.IdOrganizacao)
+                .HasColumnType("int(11)")
+                .HasColumnName("idOrganizacao");
             entity.Property(e => e.Nome)
                 .HasMaxLength(50)
                 .HasColumnName("nome");
 
-            entity.HasOne(d => d.IdOrganizacaoNavigation).WithMany(p => p.Produtos)
+            entity.HasOne(d => d.IdOrganizacaoNavigation).WithMany(p => p.Produto)
                 .HasForeignKey(d => d.IdOrganizacao)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_produto_organizacao1");
         });
 
@@ -613,13 +690,13 @@ public partial class CuidadoContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("residente");
-
             entity.HasIndex(e => e.IdFuncionario, "fk_residente_funcionario1_idx");
 
             entity.HasIndex(e => e.IdOrganizacao, "fk_residente_organizacao1_idx");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
             entity.Property(e => e.CertidaoNascimento)
                 .HasMaxLength(32)
                 .HasColumnName("certidaoNascimento");
@@ -629,11 +706,9 @@ public partial class CuidadoContext : DbContext
             entity.Property(e => e.Cpf)
                 .HasMaxLength(11)
                 .HasColumnName("cpf");
-            entity.Property(e => e.DataNascimento)
-                .HasColumnType("date")
-                .HasColumnName("dataNascimento");
+            entity.Property(e => e.DataNascimento).HasColumnName("dataNascimento");
             entity.Property(e => e.EstadoCivil)
-                .HasMaxLength(10)
+                .HasColumnType("enum('Solteiro','Casado','Divorciado','Viúvo','União estável')")
                 .HasColumnName("estadoCivil");
             entity.Property(e => e.EstadoNatal)
                 .HasMaxLength(2)
@@ -642,15 +717,19 @@ public partial class CuidadoContext : DbContext
                 .HasMaxLength(60)
                 .HasColumnName("fonteRenda");
             entity.Property(e => e.GrauDepedencia)
-                .HasColumnType("enum('0','1')")
+                .HasColumnType("tinyint(4)")
                 .HasColumnName("grauDepedencia");
             entity.Property(e => e.GrauEscolaridade)
                 .HasColumnType("enum('Fundamental Incompleto','Fundamental Completo','Médio Incompleto','Médio Completo','Superior Incompleto','Superior Completo','Pós-graduação','Mestrado','Doutorado')")
                 .HasColumnName("grauEscolaridade");
-            entity.Property(e => e.IdFuncionario).HasColumnName("idFuncionario");
-            entity.Property(e => e.IdOrganizacao).HasColumnName("idOrganizacao");
+            entity.Property(e => e.IdFuncionario)
+                .HasColumnType("int(11)")
+                .HasColumnName("idFuncionario");
+            entity.Property(e => e.IdOrganizacao)
+                .HasColumnType("int(11)")
+                .HasColumnName("idOrganizacao");
             entity.Property(e => e.Interditado)
-                .HasColumnType("enum('0','1')")
+                .HasColumnType("tinyint(4)")
                 .HasColumnName("interditado");
             entity.Property(e => e.Nome)
                 .HasMaxLength(50)
@@ -667,19 +746,21 @@ public partial class CuidadoContext : DbContext
             entity.Property(e => e.NumeroSus)
                 .HasMaxLength(15)
                 .HasColumnName("numeroSus");
-            entity.Property(e => e.QuantidadeFilhos).HasColumnName("quantidadeFilhos");
+            entity.Property(e => e.QuantidadeFilhos)
+                .HasColumnType("int(11)")
+                .HasColumnName("quantidadeFilhos");
             entity.Property(e => e.Rg)
                 .HasMaxLength(9)
                 .HasColumnName("rg");
 
-            entity.HasOne(d => d.IdFuncionarioNavigation).WithMany(p => p.Residentes)
+            entity.HasOne(d => d.IdFuncionarioNavigation).WithMany(p => p.Residente)
                 .HasForeignKey(d => d.IdFuncionario)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_residente_funcionario1");
 
-            entity.HasOne(d => d.IdOrganizacaoNavigation).WithMany(p => p.Residentes)
+            entity.HasOne(d => d.IdOrganizacaoNavigation).WithMany(p => p.Residente)
                 .HasForeignKey(d => d.IdOrganizacao)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_residente_organizacao1");
         });
 
@@ -687,17 +768,19 @@ public partial class CuidadoContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("responsavel");
-
             entity.HasIndex(e => e.IdResidente, "fk_responsavel_residente1_idx");
 
             entity.HasIndex(e => e.Nome, "idx_nome");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
             entity.Property(e => e.Bairro)
                 .HasMaxLength(50)
                 .HasColumnName("bairro");
-            entity.Property(e => e.Cep).HasColumnName("cep");
+            entity.Property(e => e.Cep)
+                .HasColumnType("int(11)")
+                .HasColumnName("cep");
             entity.Property(e => e.Cidade)
                 .HasMaxLength(30)
                 .HasColumnName("cidade");
@@ -710,14 +793,18 @@ public partial class CuidadoContext : DbContext
             entity.Property(e => e.Estado)
                 .HasMaxLength(2)
                 .HasColumnName("estado");
-            entity.Property(e => e.IdResidente).HasColumnName("idResidente");
+            entity.Property(e => e.IdResidente)
+                .HasColumnType("int(11)")
+                .HasColumnName("idResidente");
             entity.Property(e => e.Identificador)
                 .HasMaxLength(10)
                 .HasColumnName("identificador");
             entity.Property(e => e.Nome)
                 .HasMaxLength(50)
                 .HasColumnName("nome");
-            entity.Property(e => e.NumeroCasa).HasColumnName("numeroCasa");
+            entity.Property(e => e.NumeroCasa)
+                .HasColumnType("int(11)")
+                .HasColumnName("numeroCasa");
             entity.Property(e => e.PrimeiroTelefone)
                 .HasMaxLength(13)
                 .HasColumnName("primeiroTelefone");
@@ -734,40 +821,42 @@ public partial class CuidadoContext : DbContext
                 .HasMaxLength(20)
                 .HasColumnName("vinculo");
 
-            entity.HasOne(d => d.IdResidenteNavigation).WithMany(p => p.Responsavels)
+            entity.HasOne(d => d.IdResidenteNavigation).WithMany(p => p.Responsavel)
                 .HasForeignKey(d => d.IdResidente)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_responsavel_residente1");
         });
 
-        modelBuilder.Entity<Tipocuidado>(entity =>
+        modelBuilder.Entity<TipoCuidado>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("tipocuidado");
-
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
             entity.Property(e => e.Categoria)
                 .HasMaxLength(30)
                 .HasColumnName("categoria");
-            entity.Property(e => e.NomeCuidado)
+            entity.Property(e => e.Nome)
                 .HasMaxLength(50)
-                .HasColumnName("nomeCuidado");
+                .HasColumnName("nome");
         });
 
-        modelBuilder.Entity<Tipoexame>(entity =>
+        modelBuilder.Entity<TipoExame>(entity =>
         {
-            entity.HasKey(e => e.IdtipoExame).HasName("PRIMARY");
-
-            entity.ToTable("tipoexame");
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
 
             entity.HasIndex(e => e.IdResidente, "fk_tipoExame_residente1_idx");
 
-            entity.Property(e => e.IdtipoExame).HasColumnName("idtipoExame");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
             entity.Property(e => e.Descricao)
                 .HasMaxLength(100)
                 .HasColumnName("descricao");
-            entity.Property(e => e.IdResidente).HasColumnName("idResidente");
+            entity.Property(e => e.IdResidente)
+                .HasColumnType("int(11)")
+                .HasColumnName("idResidente");
             entity.Property(e => e.NomeExame)
                 .HasMaxLength(50)
                 .HasColumnName("nomeExame");
@@ -775,19 +864,52 @@ public partial class CuidadoContext : DbContext
                 .HasMaxLength(100)
                 .HasColumnName("preparacao");
 
-            entity.HasOne(d => d.IdResidenteNavigation).WithMany(p => p.Tipoexames)
+            entity.HasOne(d => d.IdResidenteNavigation).WithMany(p => p.TipoExame)
                 .HasForeignKey(d => d.IdResidente)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_tipoExame_residente1");
+        });
+
+        modelBuilder.Entity<Visita>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.HasIndex(e => e.IdResidente, "fk_visita_residente1_idx");
+
+            entity.HasIndex(e => e.IdVisitante, "fk_visita_visitante1_idx");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.DataVisita).HasColumnName("dataVisita");
+            entity.Property(e => e.HorarioVisita)
+                .HasColumnType("time")
+                .HasColumnName("horarioVisita");
+            entity.Property(e => e.IdResidente)
+                .HasColumnType("int(11)")
+                .HasColumnName("idResidente");
+            entity.Property(e => e.IdVisitante)
+                .HasColumnType("int(11)")
+                .HasColumnName("idVisitante");
+
+            entity.HasOne(d => d.IdResidenteNavigation).WithMany(p => p.Visita)
+                .HasForeignKey(d => d.IdResidente)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_visita_residente1");
+
+            entity.HasOne(d => d.IdVisitanteNavigation).WithMany(p => p.Visita)
+                .HasForeignKey(d => d.IdVisitante)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_visita_visitante1");
         });
 
         modelBuilder.Entity<Visitante>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("visitante");
-
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
             entity.Property(e => e.Cpf)
                 .HasMaxLength(11)
                 .HasColumnName("cpf");
@@ -800,37 +922,6 @@ public partial class CuidadoContext : DbContext
             entity.Property(e => e.SegundoTelefone)
                 .HasMaxLength(13)
                 .HasColumnName("segundoTelefone");
-        });
-
-        modelBuilder.Entity<Visitum>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity.ToTable("visita");
-
-            entity.HasIndex(e => e.IdResidente, "fk_visita_residente1_idx");
-
-            entity.HasIndex(e => e.IdVisitante, "fk_visita_visitante1_idx");
-
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.DataVisita)
-                .HasColumnType("date")
-                .HasColumnName("dataVisita");
-            entity.Property(e => e.HorarioVisita)
-                .HasColumnType("time")
-                .HasColumnName("horarioVisita");
-            entity.Property(e => e.IdResidente).HasColumnName("idResidente");
-            entity.Property(e => e.IdVisitante).HasColumnName("idVisitante");
-
-            entity.HasOne(d => d.IdResidenteNavigation).WithMany(p => p.Visita)
-                .HasForeignKey(d => d.IdResidente)
-                .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("fk_visita_residente1");
-
-            entity.HasOne(d => d.IdVisitanteNavigation).WithMany(p => p.Visita)
-                .HasForeignKey(d => d.IdVisitante)
-                .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("fk_visita_visitante1");
         });
 
         OnModelCreatingPartial(modelBuilder);

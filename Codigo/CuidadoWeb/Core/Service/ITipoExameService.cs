@@ -2,9 +2,9 @@
 {
 	public interface ITipoExameService
 	{
-		uint Create(Tipoexame tipoExame);
-		void Edit(Tipoexame tipoExame);
+		uint Create(TipoExame tipoExame);
+		void Edit(TipoExame tipoExame);
 		void Delete(int id);
-		Tipoexame? Get(int id);
+		TipoExame? Get(int id);
 	}
 }

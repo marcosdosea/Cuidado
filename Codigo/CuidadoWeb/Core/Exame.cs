@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Core;
@@ -17,7 +17,7 @@ public partial class Exame
 
     public int IdTipoExame { get; set; }
 
-    public virtual Consultum IdConsultaNavigation { get; set; } = null!;
+    public virtual Consulta IdConsultaNavigation { get; set; } = null!;
 
-    public virtual Tipoexame IdTipoExameNavigation { get; set; } = null!;
+    public virtual TipoExame IdTipoExameNavigation { get; set; } = null!;
 }

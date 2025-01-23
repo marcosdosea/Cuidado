@@ -1,23 +1,23 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Core;
 
 public partial class Organizacao
 {
-    public int Idorganizacao { get; set; }
-
-    public string Cnpj { get; set; } = null!;
+    public int Id { get; set; }
 
     public string Nome { get; set; } = null!;
 
-    public virtual ICollection<Atividadeexterna> Atividadeexternas { get; set; } = new List<Atividadeexterna>();
+    public string Cnpj { get; set; } = null!;
 
-    public virtual ICollection<Fornecedororganizacao> Fornecedororganizacaos { get; set; } = new List<Fornecedororganizacao>();
+    public virtual ICollection<AtividadeExterna> AtividadeExterna { get; set; } = new List<AtividadeExterna>();
 
-    public virtual ICollection<Funcionario> Funcionarios { get; set; } = new List<Funcionario>();
+    public virtual ICollection<FornecedorOrganizacao> FornecedorOrganizacao { get; set; } = new List<FornecedorOrganizacao>();
 
-    public virtual ICollection<Produto> Produtos { get; set; } = new List<Produto>();
+    public virtual ICollection<Funcionario> Funcionario { get; set; } = new List<Funcionario>();
 
-    public virtual ICollection<Residente> Residentes { get; set; } = new List<Residente>();
+    public virtual ICollection<Produto> Produto { get; set; } = new List<Produto>();
+
+    public virtual ICollection<Residente> Residente { get; set; } = new List<Residente>();
 }

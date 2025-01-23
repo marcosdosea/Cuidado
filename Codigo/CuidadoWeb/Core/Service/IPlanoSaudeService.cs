@@ -2,9 +2,9 @@
 {
 	public interface IPlanoSaudeService
 	{
-		uint Create(Planosaude planoSaude);
-		void Edit(Planosaude planoSaude);
+		uint Create(PlanoSaude planoSaude);
+		void Edit(PlanoSaude planoSaude);
 		void Delete(int id);
-		Planosaude? Get(int id);
+		PlanoSaude? Get(int id);
 	}
 }

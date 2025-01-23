@@ -2,9 +2,9 @@
 {
 	public interface IEspecialidadeMedicinaService
 	{
-		uint Create(Especialidademedicina especialidadeMedicina);
-		void Edit(Especialidademedicina especialidadeMedicina);
+		uint Create(EspecialidadeMedicina especialidadeMedicina);
+		void Edit(EspecialidadeMedicina especialidadeMedicina);
 		void Delete(int id);
-		Especialidademedicina? Get(int id);
+		EspecialidadeMedicina? Get(int id);
 	}
 }

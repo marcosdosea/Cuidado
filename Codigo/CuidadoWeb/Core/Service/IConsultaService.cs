@@ -2,9 +2,9 @@
 {
 	public interface IConsultaService
 	{
-		uint Create(Consultum consulta);
-		void Edit(Consultum consulta);
+		uint Create(Consulta consulta);
+		void Edit(Consulta consulta);
 		void Delete(int id);
-		Consultum? Get(int id);
+		Consulta? Get(int id);
 	}
 }

@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Core;
 
-public partial class Aquisicaoproduto
+public partial class AquisicaoProduto
 {
     public int IdAquisicao { get; set; }
 

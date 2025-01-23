@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Core;
 
-public partial class Tipoexame
+public partial class TipoExame
 {
-    public int IdtipoExame { get; set; }
+    public int Id { get; set; }
 
     public string NomeExame { get; set; } = null!;
 
@@ -15,7 +15,7 @@ public partial class Tipoexame
 
     public int IdResidente { get; set; }
 
-    public virtual ICollection<Exame> Exames { get; set; } = new List<Exame>();
+    public virtual ICollection<Exame> Exame { get; set; } = new List<Exame>();
 
     public virtual Residente IdResidenteNavigation { get; set; } = null!;
 }

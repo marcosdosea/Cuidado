@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Core;
 
-public partial class Planejamentocuidado
+public partial class PlanejamentoCuidado
 {
     public int Id { get; set; }
 
@@ -21,11 +21,11 @@ public partial class Planejamentocuidado
 
     public int IdProduto { get; set; }
 
-    public virtual ICollection<Cuidado> Cuidados { get; set; } = new List<Cuidado>();
+    public virtual ICollection<Cuidado> Cuidado { get; set; } = new List<Cuidado>();
 
     public virtual Produto IdProdutoNavigation { get; set; } = null!;
 
-    public virtual Tipocuidado IdTipoCuidaddoNavigation { get; set; } = null!;
+    public virtual TipoCuidado IdTipoCuidaddoNavigation { get; set; } = null!;
 
-    public virtual ICollection<Planejamentocuidadodiario> Planejamentocuidadodiarios { get; set; } = new List<Planejamentocuidadodiario>();
+    public virtual ICollection<PlanejamentoCuidadoDiario> PlanejamentoCuidadoDiario { get; set; } = new List<PlanejamentoCuidadoDiario>();
 }

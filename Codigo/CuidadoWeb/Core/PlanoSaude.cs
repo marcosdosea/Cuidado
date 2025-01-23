@@ -1,15 +1,21 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Core;
 
-public partial class Fonterendum
+public partial class PlanoSaude
 {
     public int Id { get; set; }
 
     public string Nome { get; set; } = null!;
 
-    public decimal Valor { get; set; }
+    public int Numero { get; set; }
+
+    public int NumeroSerie { get; set; }
+
+    public string? PrimeiroTelefone { get; set; }
+
+    public string? SegundoTelefone { get; set; }
 
     public int IdResidente { get; set; }
 

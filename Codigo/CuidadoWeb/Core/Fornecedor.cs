@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Core;
@@ -15,7 +15,7 @@ public partial class Fornecedor
 
     public string? SegundoTelefone { get; set; }
 
-    public virtual ICollection<Aquisicao> Aquisicaos { get; set; } = new List<Aquisicao>();
+    public virtual ICollection<Aquisicao> Aquisicao { get; set; } = new List<Aquisicao>();
 
-    public virtual ICollection<Fornecedororganizacao> Fornecedororganizacaos { get; set; } = new List<Fornecedororganizacao>();
+    public virtual ICollection<FornecedorOrganizacao> FornecedorOrganizacao { get; set; } = new List<FornecedorOrganizacao>();
 }

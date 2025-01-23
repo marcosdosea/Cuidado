@@ -2,9 +2,9 @@
 {
 	public interface IPlanejamentoCuidadoService
 	{
-		uint Create(Planejamentocuidado planejamentoCuidado);
-		void Edit(Planejamentocuidado planejamentoCuidado);
+		uint Create(PlanejamentoCuidadoDiario planejamentoCuidado);
+		void Edit(PlanejamentoCuidadoDiario planejamentoCuidado);
 		void Delete(int id);
-		Planejamentocuidado? Get(int id);
+		PlanejamentoCuidadoDiario? Get(int id);
 	}
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Core;
@@ -11,5 +11,5 @@ public partial class Acompanhante
 
     public int IdAtividadeExterna { get; set; }
 
-    public virtual Atividadeexterna IdAtividadeExternaNavigation { get; set; } = null!;
+    public virtual AtividadeExterna IdAtividadeExternaNavigation { get; set; } = null!;
 }

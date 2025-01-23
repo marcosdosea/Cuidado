@@ -1,21 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Core;
 
-public partial class Planosaude
+public partial class FonteRenda
 {
     public int Id { get; set; }
 
     public string Nome { get; set; } = null!;
 
-    public int Numero { get; set; }
-
-    public int NumeroSerie { get; set; }
-
-    public string? PrimeiroTelefone { get; set; }
-
-    public string? SegundoTelefone { get; set; }
+    public decimal Valor { get; set; }
 
     public int IdResidente { get; set; }
 
