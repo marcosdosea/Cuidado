@@ -5,6 +5,7 @@ using Service;
 using CuidadoWeb.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CuidadoWeb
 {
@@ -68,6 +69,13 @@ namespace CuidadoWeb
                 options.SlidingExpiration = true;
             });
 
+            // Block anonymous access by default on new controllers. E.g. do not
+            // require to add [Authorize] on every controller.
+            builder.Services.AddAuthorization(options => {
+                options.FallbackPolicy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+            });
 
             builder.Services.AddTransient<ICuidadoService, CuidadoService>();
             builder.Services.AddTransient<IProdutoService, ProdutoService>();
