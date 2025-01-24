@@ -1,8 +1,15 @@
-@model CardViewModel;
+@model ManagerViewModel;
 
-<a class="card" asp-controller="Manager" asp-action="Operations"
-    aps-route-target="@Model.Action">
-    <p class="title app-text-h-lg">@Model.Title</p>
-    <i class="icon ph ph-@Model.Icon"></i>
-</a>
+@if (Model.Controller == null) {
+    <a class="card" asp-controller="Manager" asp-action="Operations"
+        asp-route-target="@Model.Action">
+        <p class="title app-text-h-lg">@Model.Title</p>
+        <i class="icon ph ph-@Model.Icon"></i>
+    </a>
+} else {
+    <a class="card" asp-controller="@Model.Controller" asp-action="@Model.Action">
+        <p class="title app-text-h-lg">@Model.Title</p>
+        <i class="icon ph ph-@Model.Icon"></i>
+    </a>
+}
 
