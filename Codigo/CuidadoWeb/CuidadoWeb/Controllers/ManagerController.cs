@@ -9,9 +9,9 @@ namespace CuidadoWeb.Controllers
             return View();
         }
 
-        public ActionResult Operations()
+        public ActionResult Operations(string target)
         {
-            return View();
+            return View(nameof(Operations), target);
         }
     }
 }

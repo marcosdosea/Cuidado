@@ -1,16 +1,23 @@
-﻿@{
-    ViewData["Title"] = "Manager Page";
+﻿@model string;
 
-    var cards = new List<CardViewModel>
+@{
+    ViewData["Title"] = "Managing " + Model;
+
+    var cards = new List<ManagerViewModel>
     {
-        new CardViewModel { Title = "Buscar", Icon = "magnifying-glass",
-    Action="" },
-        new CardViewModel { Title = "Novo", Icon = "plus",
-    Action="" },
-        new CardViewModel { Title = "Excluir", Icon = "trash",
-    Action=""},
-        new CardViewModel { Title = "Alterar", Icon = "pencil",
-    Action="" },
+        new ManagerViewModel {
+            Title = "Buscar",
+            Icon = "magnifying-glass",
+            Controller = Model,
+            Action="Index"
+        },
+
+        new ManagerViewModel {
+            Title = "Novo",
+            Icon = "plus",
+            Controller = Model,
+            Action="Create"
+        },
     };
 }
 
@@ -18,10 +25,6 @@
     <div class="row">
         <partial name="_Card.cshtml" model="cards[0]">
         <partial name="_Card.cshtml" model="cards[1]">
-    </div>
-    <div class="row">
-        <partial name="_Card.cshtml" model="cards[2]">
-        <partial name="_Card.cshtml" model="cards[3]">
     </div>
 </div>
 
