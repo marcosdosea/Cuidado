@@ -21,12 +21,12 @@ namespace CuidadoWeb
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var connectionString = builder.Configuration.GetConnectionString("CuidadoDatabase")
-                ?? throw new InvalidOperationException(); ;
+                ?? throw new InvalidOperationException();
             builder.Services.AddDbContext<CuidadoContext>(
                 options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-            connectionString = builder.Configuration.GetConnectionString("IdentityDatabase")
-                ?? throw new InvalidOperationException(); ;
+            connectionString = builder.Configuration.GetConnectionString("IdentityContextConnection")
+                ?? throw new InvalidOperationException();
             builder.Services.AddDbContext<IdentityContext>(
                 options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
@@ -59,19 +59,21 @@ namespace CuidadoWeb
 
             builder.Services.ConfigureApplicationCookie(options =>
             {
-                //options.AccessDeniedPath = "/Identity/Autenticar";
                 options.Cookie.Name = "CuidadoCookieName";
-                options.Cookie.HttpOnly = true;
+                options.AccessDeniedPath = "/Identity/Account/AcessDenied";
+                options.LoginPath = "/Identity/Account/Login";
+                options.LogoutPath = "/Identity/Account/Logout";
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
-                //options.LoginPath = "/Identity/Autenticar";
-                // ReturnUrlParameter requires 
-                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                options.Cookie.HttpOnly = true;
                 options.SlidingExpiration = true;
+                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
             });
 
             // Block anonymous access by default on new controllers. E.g. do not
             // require to add [Authorize] on every controller.
-            builder.Services.AddAuthorization(options => {
+            builder.Services.AddAuthorization(options =>
+            {
                 options.FallbackPolicy = new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser()
                     .Build();

@@ -21,7 +21,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
         }
 
         .container-login {
@@ -69,20 +68,29 @@
             }
 
         input.form-control {
-            background-color: #CCD9EB;
+            background-color: #CCD9EB !important;
             border-radius: 8px;
             border: none;
             color: #000;
-            font-size: 1.3rem;
+            font-size: 1.3rem !important;
             padding-left: 45px;
             width: 530px;
             height: 65px;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease;
         }
 
+            input.form-control:-webkit-autofill {
+                background-color: #CCD9EB !important;
+                box-shadow: 0 0 0px 1000px #CCD9EB inset !important;
+            }
+
             input.form-control:focus {
+                background-color: #CCD9EB !important;
                 outline: none;
                 border: 2px solid #A2C8F7;
                 box-shadow: 0 0 5px rgba(162, 200, 247, 0.5);
+                font-size: 1.3rem !important;
             }
 
         button.btn {
@@ -95,7 +103,6 @@
             color: white;
             border: none;
             border-radius: 8px;
-            cursor: pointer;
             transition: background-color 0.3s;
             display: flex;
             justify-content: center;
@@ -106,35 +113,71 @@
 
             button.btn:hover {
                 background-color: #0056b3;
+                cursor: pointer;
             }
 
             button.btn i {
                 font-size: 1.8rem;
             }
+
+        .register-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-top: 20px;
+            font-size: 21px;
+            color: #000000;
+            font-weight: 600;
+            width: 100%;
+            text-align: center;
+        }
+
+            .register-link div {
+                margin-top: 5px;
+                text-align: center;
+            }
+
+            .register-link a {
+                margin-left: 5px;
+                color: #1a73e8;
+                text-decoration: none;
+            }
+
+                .register-link a:hover {
+                    color: #000000;
+                }
     </style>
 </head>
 
 <div id="login">
     <div class="container-login">
         <img src="~/assets/logo/colorful.svg" alt="Cuidado logo" class="img-fluid">
-        <form method="post" action="/Account/Login">
+        <form method="post">
             <div>
                 <div class="mb-3">
                     <div class="input-group-login">
                         <i class="fas fa-id-card"></i>
-                        <input type="text" class="form-control" id="username" name="username" required placeholder="CPF">
+                        <input type="text" asp-for="Input.UserName" class="form-control" maxlength="11" required aria-required="true" placeholder="CPF">
+                        <span asp-validation-for="Input.UserName" class="messages"></span>
                     </div>
                 </div>
                 <div class="mb-3">
                     <div class="input-group-login">
                         <i class="fas fa-key"></i>
-                        <input type="password" class="form-control" id="password" name="password" required placeholder="Senha">
+                        <input type="password" asp-for="Input.Password" class="form-control" autocomplete="current-password" required aria-required="true" placeholder="Senha">
+                        <span asp-validation-for="Input.Password" class="messages"></span>
                     </div>
                 </div>
             </div>
             <button type="submit" class="btn">
                 Entrar <i class="fas fa-arrow-right"></i>
             </button>
+            <div class="register-link">
+                <a asp-page="./ForgotPassword">Esqueceu a senha?</a>
+                <div>Não tem uma conta?<a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Registre-se</a></div>
+            </div>
         </form>
     </div>
 </div>
