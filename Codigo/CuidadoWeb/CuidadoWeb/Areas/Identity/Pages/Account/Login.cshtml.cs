@@ -67,8 +67,8 @@ namespace CuidadoWeb.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [CPF(ErrorMessage = "O cpf informado n„o È v·lido")]
-            [Required(ErrorMessage = "O cpf È obrigatÛrio")]
+            [CPF(ErrorMessage = "O cpf informado n√£o √© v√°lido")]
+            [Required(ErrorMessage = "O cpf √© obrigat√≥rio")]
             [StringLength(11, MinimumLength = 11, ErrorMessage = "O cpf deve ter 11 caracteres")]
             public string UserName { get; set; }
 
@@ -76,7 +76,7 @@ namespace CuidadoWeb.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required(ErrorMessage = "A senha È obrigatÛria")]
+            [Required(ErrorMessage = "A senha √© obrigat√≥ria")]
             [StringLength(20, ErrorMessage = "A senha deve ter entre 8 e 20 caracteres", MinimumLength = 8)]
             [DataType(DataType.Password)]
             public string Password { get; set; }
@@ -111,8 +111,6 @@ namespace CuidadoWeb.Areas.Identity.Pages.Account
             returnUrl ??= Url.Content("~/");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
-            var teste = Input.RememberMe;
 
             if (ModelState.IsValid)
             {
