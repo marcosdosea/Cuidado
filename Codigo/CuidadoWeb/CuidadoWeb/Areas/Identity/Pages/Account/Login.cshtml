@@ -75,7 +75,7 @@
             font-size: 1.3rem !important;
             padding-left: 45px;
             width: 425px;
-            height: 55px;
+            height: 50px;
             box-sizing: border-box;
             transition: background-color 0.3s ease;
         }
@@ -119,6 +119,19 @@
                 font-size: 1.8rem;
             }
 
+        .messages {
+            color: red;
+            text-align: center;
+            padding-top: 8px;
+            padding-bottom: 3px;
+        }
+
+            .messages li {
+                list-style-type: none;
+                padding-left: 0;
+                margin: 0;
+            }
+
         .register-link {
             display: flex;
             flex-direction: column;
@@ -157,6 +170,7 @@
         <form method="post">
             <div>
                 <div class="mb-3">
+                    <div asp-validation-summary="ModelOnly" class="messages"></div>
                     <div class="input-group-login">
                         <i class="fas fa-id-card"></i>
                         <input type="text" asp-for="Input.UserName" class="form-control" maxlength="11" required aria-required="true" placeholder="CPF">
@@ -180,3 +194,6 @@
         </form>
     </div>
 </div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
