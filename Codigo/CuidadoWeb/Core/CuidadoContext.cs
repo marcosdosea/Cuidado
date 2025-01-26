@@ -78,7 +78,7 @@ public partial class CuidadoContext : DbContext
         if (_configuration == null)
             throw new InvalidOperationException();
 
-        var connectionString = _configuration.GetConnectionString("CuidadoDatabase");
+        var connectionString = _configuration.GetConnectionString("CuidadoConnection");
         optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
     }
 
