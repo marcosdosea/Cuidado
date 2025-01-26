@@ -20,7 +20,7 @@ namespace CuidadoWeb
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            var connectionString = builder.Configuration.GetConnectionString("CuidadoDatabase")
+            var connectionString = builder.Configuration.GetConnectionString("CuidadoConnection")
                 ?? throw new InvalidOperationException();
             builder.Services.AddDbContext<CuidadoContext>(
                 options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
