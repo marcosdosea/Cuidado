@@ -23,7 +23,6 @@ using Util;
 
 namespace CuidadoWeb.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<UsuarioIdentity> _signInManager;
@@ -154,7 +153,7 @@ namespace CuidadoWeb.Areas.Identity.Pages.Account
                     // else
                     // {
                     // await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToPage("/Account/Login"); 
+                    return RedirectToPage("/Account/Login");
                     // }
                 }
 

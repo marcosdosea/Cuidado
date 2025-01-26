@@ -25,19 +25,19 @@
 
         .container-login {
             width: 100%;
-            max-width: 400px;
+            max-width: 350px;
             padding: 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 40px;
+            gap: 30px;
             text-align: center;
         }
 
             .container-login img {
-                width: 150%;
-                margin-bottom: 30px;
+                width: 140%;
+                margin-bottom: 20px;
             }
 
             .container-login > form {
@@ -45,7 +45,7 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                gap: 50px;
+                gap: 30px;
                 margin-bottom: 20px;
             }
 
@@ -74,8 +74,8 @@
             color: #000;
             font-size: 1.3rem !important;
             padding-left: 45px;
-            width: 530px;
-            height: 65px;
+            width: 425px;
+            height: 55px;
             box-sizing: border-box;
             transition: background-color 0.3s ease;
         }
@@ -94,11 +94,11 @@
             }
 
         button.btn {
-            width: 300px;
-            height: 55px;
-            font-size: 1.3rem;
-            padding: 1rem;
-            margin-top: 40px;
+            width: 225px;
+            height: 48px;
+            font-size: 1.2rem;
+            padding: 0.8rem;
+            margin-top: 20px;
             background-color: #007BFF;
             color: white;
             border: none;
@@ -108,7 +108,6 @@
             justify-content: center;
             align-items: center;
             gap: 12px;
-            margin-top: 20px;
         }
 
             button.btn:hover {
@@ -127,7 +126,7 @@
             justify-content: center;
             position: relative;
             margin-top: 20px;
-            font-size: 21px;
+            font-size: 18px;
             color: #000000;
             font-weight: 600;
             width: 100%;
@@ -146,7 +145,8 @@
             }
 
                 .register-link a:hover {
-                    color: #000000;
+                    color: #0056b3;
+                    cursor: pointer;
                 }
     </style>
 </head>
@@ -176,7 +176,6 @@
             </button>
             <div class="register-link">
                 <a asp-page="./ForgotPassword">Esqueceu a senha?</a>
-                <div>Não tem uma conta?<a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Registre-se</a></div>
             </div>
         </form>
     </div>
