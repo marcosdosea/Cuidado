@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CuidadoWeb.Models;
 
-public class Responsavel
+public class ResponsavelViewModel
 {
     [Key]
     [DisplayName("Código")]

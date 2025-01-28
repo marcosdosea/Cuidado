@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CuidadoWeb.Models;
 
-public class Produto
+public class ProdutoViewModel
 {
     [Key]
     [DisplayName("Código")]

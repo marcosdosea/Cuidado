@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CuidadoWeb.Models;
 
-public class Consulta
+public class ConsultaViewModel
 {
     [Key]
     [DisplayName("Código")]
