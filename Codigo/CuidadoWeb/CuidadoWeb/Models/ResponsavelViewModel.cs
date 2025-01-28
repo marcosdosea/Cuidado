@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CuidadoWeb.Models;
 
-public class Funcionario
+public class Responsavel
 {
     [Key]
     [DisplayName("Código")]
@@ -13,33 +13,23 @@ public class Funcionario
 
     public string Cpf { get; set; } = null!;
 
-    public DateOnly DataNascimento { get; set; }
+    public string Rg { get; set; } = null!;
 
-    public DateOnly DataAdmissao { get; set; }
-
-    public string Cargo { get; set; } = null!;
-
-    /// <summary>
-    /// A -&gt; Ativo
-    /// I -&gt; Inativo
-    /// </summary>
-    public string Status { get; set; } = null!;
-
-    public decimal Salario { get; set; }
+    public string Vinculo { get; set; } = null!;
 
     public int NumeroCasa { get; set; }
 
-    public string? IdentificadorCasa { get; set; }
+    public string? Identificador { get; set; }
 
-    public string Rua { get; set; } = null!;
-
-    public string Bairro { get; set; } = null!;
+    public int Cep { get; set; }
 
     public string Cidade { get; set; } = null!;
 
     public string Estado { get; set; } = null!;
 
-    public int Cep { get; set; }
+    public string Rua { get; set; } = null!;
+
+    public string Bairro { get; set; } = null!;
 
     public string? Complemento { get; set; }
 
@@ -47,6 +37,6 @@ public class Funcionario
 
     public string? SegundoTelefone { get; set; }
 
-    public int IdOrganizacao { get; set; }
+    public int IdResidente { get; set; }
 }
 
