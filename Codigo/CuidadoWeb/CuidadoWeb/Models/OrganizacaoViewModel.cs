@@ -3,18 +3,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CuidadoWeb.Models;
 
-public class VisitanteViewModel
+public class OrganizacaoViewModel
 {
     [Key]
     [DisplayName("Código")]
     public int Id { get; set; }
 
+    [Required]
     public string Nome { get; set; } = null!;
 
-    public string Cpf { get; set; } = null!;
-
-    public string? PrimeiroTelefone { get; set; }
-
-    public string? SegundoTelefone { get; set; }
+    [Required]
+    [DisplayName("CNPJ")]
+    public string Cnpj { get; set; } = null!;
 }
 

@@ -3,18 +3,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CuidadoWeb.Models;
 
-public class CuidadoViewModel
+public class VisitaViewModel
 {
     [Key]
     [DisplayName("Código")]
     public int Id { get; set; }
 
-    public DateTime DataExecucao { get; set; }
+    public DateOnly DataVisita { get; set; }
 
-    public int IdFuncionario { get; set; }
-
-    public int IdPlanejamentoCuidado { get; set; }
+    public TimeOnly HorarioVisita { get; set; }
 
     public int IdResidente { get; set; }
+
+    public int IdVisitante { get; set; }
 }
 

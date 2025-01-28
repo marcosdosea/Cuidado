@@ -1,25 +1,50 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
-namespace CuidadoWeb.Models
+namespace CuidadoWeb.Models;
+
+public class ResidenteViewModel
 {
-	public class ResidenteViewModel
-	{
-		[Key]
-		[Display(Name = "Código")]
-		public int Id { get; set; }
+    [Key]
+    [DisplayName("Código")]
+    public int Id { get; set; }
 
-		[Required(ErrorMessage = "Campo requerido")]
-		[StringLength(50, MinimumLength = 5, ErrorMessage = "Nome do Residente deve ter entre 5 e 45 caracteres")]
-		public string Nome { get; set; } = null!;
+    public string Nome { get; set; } = null!;
 
-		[Required(ErrorMessage = "Campo requerido")]
-		[Display(Name = "Classificação")]
-		[StringLength(30, MinimumLength = 1, ErrorMessage = "Classificação do Residente deve ter entre 1 e 30 caracteres")]
-		public string Classificacao { get; set; } = null!;
+    public string NomeMae { get; set; } = null!;
 
-		[ForeignKey("Organizacao")]
-		[Display(Name = "Código Organização")]
-		public int IdOrganizacao { get; set; }
-	}
+    public string NomePai { get; set; } = null!;
+
+    public DateOnly DataNascimento { get; set; }
+
+    public string EstadoCivil { get; set; } = null!;
+
+    public string CidadeNatal { get; set; } = null!;
+
+    public string EstadoNatal { get; set; } = null!;
+
+    public string GrauEscolaridade { get; set; } = null!;
+
+    public int QuantidadeFilhos { get; set; }
+
+    public sbyte GrauDepedencia { get; set; }
+
+    public sbyte Interditado { get; set; }
+
+    public string FonteRenda { get; set; } = null!;
+
+    public string Cpf { get; set; } = null!;
+
+    public string Rg { get; set; } = null!;
+
+    public string CertidaoNascimento { get; set; } = null!;
+
+    public string NumeroSus { get; set; } = null!;
+
+    public string NumeroNis { get; set; } = null!;
+
+    public int IdOrganizacao { get; set; }
+
+    public int IdFuncionario { get; set; }
 }
+
