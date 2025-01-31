@@ -5,7 +5,6 @@ using CuidadoWeb.Mappers;
 using Core;
 using Microsoft.AspNetCore.Mvc;
 using CuidadoWeb.Models;
-using Core.DTO;
 
 namespace CuidadoWeb.Controllers.Tests
 {
@@ -26,11 +25,11 @@ namespace CuidadoWeb.Controllers.Tests
 				.Returns(GetTestFuncionarios());
 			mockService.Setup(service => service.Get(1))
 				.Returns(GetTargetFuncionario());
-
 			mockService.Setup(service => service.Edit(It.IsAny<Funcionario>()))
 				.Verifiable();
 			mockService.Setup(service => service.Create(It.IsAny<Funcionario>()))
 				.Verifiable();
+
 			controller = new FuncionarioController(mockService.Object, mapper);
 		}
 
@@ -58,9 +57,11 @@ namespace CuidadoWeb.Controllers.Tests
 			ViewResult viewResult = (ViewResult)result;
 			Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(FuncionarioViewModel));
 			FuncionarioViewModel funcionarioViewModel = (FuncionarioViewModel)viewResult.ViewData.Model;
-			Assert.AreEqual("Guilherme Lima Santos", funcionarioViewModel.Nome);
-			Assert.AreEqual(DateTime.Parse("2001-10-17"), funcionarioViewModel.DataNascimento);
-		}
+            Assert.AreEqual("Igor Andrade Nepomuceno", funcionarioViewModel.Nome);
+            Assert.AreEqual("48754544068", funcionarioViewModel.Cpf);
+            Assert.AreEqual(DateOnly.Parse("1992-10-27"), funcionarioViewModel.DataNascimento);
+            Assert.AreEqual(DateOnly.Parse("2015-01-01"), funcionarioViewModel.DataAdmissao);
+        }
 
 		[TestMethod()]
 		public void CreateTest()
@@ -94,9 +95,11 @@ namespace CuidadoWeb.Controllers.Tests
 			ViewResult viewResult = (ViewResult)result;
 			Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(FuncionarioViewModel));
 			FuncionarioViewModel funcionarioViewModel = (FuncionarioViewModel)viewResult.ViewData.Model;
-			Assert.AreEqual("Guilherme Lima Santos", funcionarioViewModel.Nome);
-			Assert.AreEqual(DateTime.Parse("2001-10-17"), funcionarioViewModel.DataNascimento);
-		}
+            Assert.AreEqual("Igor Andrade Nepomuceno", funcionarioViewModel.Nome);
+            Assert.AreEqual("48754544068", funcionarioViewModel.Cpf);
+            Assert.AreEqual(DateOnly.Parse("1992-10-27"), funcionarioViewModel.DataNascimento);
+            Assert.AreEqual(DateOnly.Parse("2015-01-01"), funcionarioViewModel.DataAdmissao);
+        }
 
 		[TestMethod()]
 		public void EditTest1()
@@ -121,9 +124,11 @@ namespace CuidadoWeb.Controllers.Tests
 			ViewResult viewResult = (ViewResult)result;
 			Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(FuncionarioViewModel));
 			FuncionarioViewModel funcionarioViewModel = (FuncionarioViewModel)viewResult.ViewData.Model;
-			Assert.AreEqual("Guilherme Lima Santos", funcionarioViewModel.Nome);
-			Assert.AreEqual(DateTime.Parse("2001-10-17"), funcionarioViewModel.DataNascimento);
-		}
+			Assert.AreEqual("Igor Andrade Nepomuceno", funcionarioViewModel.Nome);
+            Assert.AreEqual("48754544068", funcionarioViewModel.Cpf);
+            Assert.AreEqual(DateOnly.Parse("1992-10-27"), funcionarioViewModel.DataNascimento);
+            Assert.AreEqual(DateOnly.Parse("2015-01-01"), funcionarioViewModel.DataAdmissao);
+        }
 
 		[TestMethod()]
 		public void DeleteTest1()
@@ -141,26 +146,26 @@ namespace CuidadoWeb.Controllers.Tests
 		{
 			return new FuncionarioViewModel
 			{
-				Id = 1,
-				Nome = "Guilherme Lima Santos",
-				Cpf = "003.336.119-82",
-				DataNascimento = DateTime.Parse("2001-10-17"),
-				DataAdmissao = DateTime.Parse("2018-01-01"),
-				Cargo = "Cuidador",
-				Status = "Ativo",
-				Salario = 4200.00m,
-				NumeroCasa = 15,
-				IdentificadorCasa = "A",
-				Rua = "Rua dos Escritores",
-				Bairro = "Centro",
-				Cidade = "Itabaiana",
-				Estado = "SE",
-				Cep = 49500511,
-				Complemento = "",
-				PrimeiroTelefone = "(79) 99919-0056",
-				SegundoTelefone = "",
-				IdOrganizacao = 1
-			};
+                Id = 1,
+                Nome = "Igor Andrade Nepomuceno",
+                Cpf = "48754544068",
+                DataNascimento = DateOnly.Parse("1992-10-27"),
+                DataAdmissao = DateOnly.Parse("2015-01-01"),
+                Cargo = "Cuidador",
+                Status = "Ativo",
+                Salario = 3100.00m,
+                NumeroCasa = 11,
+                IdentificadorCasa = "A",
+                Rua = "Rua dos Escritores",
+                Bairro = "Centro",
+                Cidade = "Itabaiana",
+                Estado = "SE",
+                Cep = 49500511,
+                Complemento = "Apartamento 201",
+                PrimeiroTelefone = "79999194678",
+                SegundoTelefone = "79980054321",
+                IdOrganizacao = 1
+            };
 
 		}
 
@@ -168,26 +173,26 @@ namespace CuidadoWeb.Controllers.Tests
 		{
 			return new Funcionario
 			{
-				Id = 1,
-				Nome = "Guilherme Lima Santos",
-				Cpf = "003.336.119-82",
-				DataNascimento = DateOnly.Parse("2001-10-17"),
-				DataAdmissao = DateOnly.Parse("2018-01-01"),
-				Cargo = "Cuidador",
-				Status = "Ativo",
-				Salario = 4200.00m,
-				NumeroCasa = 15,
-				IdentificadorCasa = "A",
-				Rua = "Rua dos Escritores",
-				Bairro = "Centro",
-				Cidade = "Itabaiana",
-				Estado = "SE",
-				Cep = 49500511,
-				Complemento = "",
-				PrimeiroTelefone = "(79) 99919-0056",
-				SegundoTelefone = "",
-				IdOrganizacao = 1
-			};
+                Id = 1,
+                Nome = "Igor Andrade Nepomuceno",
+                Cpf = "48754544068",
+                DataNascimento = DateOnly.Parse("1992-10-27"),
+                DataAdmissao = DateOnly.Parse("2015-01-01"),
+                Cargo = "Cuidador",
+                Status = "Ativo",
+                Salario = 3100.00m,
+                NumeroCasa = 11,
+                IdentificadorCasa = "A",
+                Rua = "Rua dos Escritores",
+                Bairro = "Centro",
+                Cidade = "Itabaiana",
+                Estado = "SE",
+                Cep = 49500511,
+                Complemento = "Apartamento 201",
+                PrimeiroTelefone = "79999194678",
+                SegundoTelefone = "79980054321",
+                IdOrganizacao = 1
+            };
 		}
 
 		private static IEnumerable<Funcionario> GetTestFuncionarios()
@@ -197,11 +202,11 @@ namespace CuidadoWeb.Controllers.Tests
 				new Funcionario
 				{
 					Id = 1,
-					Nome = "Cleide Ramos da Silva",
-					Cpf = "123.456.789-00",
+					Nome = "Igor Andrade Nepomuceno",
+					Cpf = "48754544068",
 					DataNascimento = DateOnly.Parse("1992-10-27"),
 					DataAdmissao = DateOnly.Parse("2015-01-01"),
-					Cargo = "Faxineira",
+					Cargo = "Cuidador",
 					Status = "Ativo",
 					Salario = 3100.00m,
 					NumeroCasa = 11,
@@ -212,18 +217,18 @@ namespace CuidadoWeb.Controllers.Tests
 					Estado = "SE",
 					Cep = 49500511,
 					Complemento = "Apartamento 201",
-					PrimeiroTelefone = "(79) 99919-4678",
-					SegundoTelefone = "(79) 98005-4321",
+					PrimeiroTelefone = "79999194678",
+					SegundoTelefone = "79980054321",
 					IdOrganizacao = 1
 				},
 				new Funcionario
 				{
-					Id = 3,
+					Id = 2,
 					Nome = "Paulo Ramos da Costa",
-					Cpf = "123.456.700-00",
+					Cpf = "49118473016",
 					DataNascimento = DateOnly.Parse("1990-08-02"),
 					DataAdmissao = DateOnly.Parse("2020-01-01"),
-					Cargo = "Zelador",
+					Cargo = "Cuidador",
 					Status = "Ativo",
 					Salario = 3100.00m,
 					NumeroCasa = 26,
@@ -234,18 +239,18 @@ namespace CuidadoWeb.Controllers.Tests
 					Estado = "SE",
 					Cep = 49500501,
 					Complemento = "",
-					PrimeiroTelefone = "(79) 99919-4678",
+					PrimeiroTelefone = "79999194678",
 					SegundoTelefone = "",
 					IdOrganizacao = 1
 				},
 				new Funcionario
 				{
-					Id = 4,
+					Id = 3,
 					Nome = "Gildete da Silva Matos",
-					Cpf = "024.456.700-00",
+					Cpf = "87620365052",
 					DataNascimento = DateOnly.Parse("2000-10-02"),
 					DataAdmissao = DateOnly.Parse("2021-01-01"),
-					Cargo = "Cuidadora",
+					Cargo = "Diretora",
 					Status = "Ativo",
 					Salario = 4200.00m,
 					NumeroCasa = 12,
@@ -256,9 +261,9 @@ namespace CuidadoWeb.Controllers.Tests
 					Estado = "SE",
 					Cep = 49500512,
 					Complemento = "",
-					PrimeiroTelefone = "(79) 99919-5578",
+					PrimeiroTelefone = "79999195578",
 					SegundoTelefone = "",
-					IdOrganizacao = 1
+					IdOrganizacao = 2
 				},
 			};
 		}
