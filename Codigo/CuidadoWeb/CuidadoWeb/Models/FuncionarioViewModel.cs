@@ -17,10 +17,10 @@ namespace CuidadoWeb.Models
 		public string Cpf { get; set; } = null!;
 
 		[Required(ErrorMessage = "Campo requerido")]
-		public DateTime DataNascimento { get; set; }
+		public DateOnly DataNascimento { get; set; }
 
 		[Required(ErrorMessage = "Campo requerido")]
-		public DateTime DataAdmissao { get; set; }
+		public DateOnly DataAdmissao { get; set; }
 
 		[Required(ErrorMessage = "Campo requerido")]
 		public string Cargo { get; set; } = null!;
