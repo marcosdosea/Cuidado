@@ -75,6 +75,10 @@ public partial class CuidadoContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Test")
+            return;
+
+
         if (_configuration == null)
             throw new InvalidOperationException();
 
