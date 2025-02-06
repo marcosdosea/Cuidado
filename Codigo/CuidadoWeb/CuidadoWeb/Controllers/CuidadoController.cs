@@ -100,7 +100,7 @@ namespace CuidadoWeb.Controllers
         // POST: CuidadoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, CuidadoViewModel viewModel)
         {
             this.service.Delete(id);
             return RedirectToAction(nameof(Index));
