@@ -36,7 +36,11 @@ Sumário
 <h2 id="publico">3. Público Alvo :dart:</h2>
 <p>O público-alvo do Cuidado são administradores e equipes de lares de idosos que buscam uma solução integrada para
     melhorar a gestão de cuidados e a administração do lar.</p>
-<h2 id="equipe">4. Equipe :busts_in_silhouette:</h2>
+<h2 id="linksuteis">4. Links Úteis</h2>
+<a href="https://youtu.be/kIbBtWGpb-Y?si=iR4ruqObpeHJPtie" target="_blank">1 - Vídeo de Apresentação</a>
+
+<a href="https://github.com/marcosdosea/Cuidado/blob/main/Gerenciamento/Manual%20de%20Uso.pdf" target="_blank">2 - Manual de Uso</a>
+<h2 id="equipe">5. Equipe :busts_in_silhouette:</h2>
 <table align="center">
     <tr>
         <td align="center"> <a href="https://github.com/GhostRes" target="_blank"> <img style="border-radius:100px;"
